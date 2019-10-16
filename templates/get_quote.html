@@ -1,8 +1,45 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<div class="row">
+    <div class="col">
+        <h1 class="display-3">{{ stock_data.companyName }}</h1>
+        <p class="display-6">
+            <span class="font-weight-light">NSE</span> :
+            <span class="font-weight-bold">{{ stock_data.symbol }}</span> |
+            <span class="font-weight-light">ISIN</span> :
+            <span class="font-weight-bold">{{ stock_data.isinCode }}</span> |
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4">
+        <div class="row" >
+            <div class="col-lg-4" style="background: red;">
+                <p class="display-5 font-weight-bold">NSE <span class="text-warning">LIVE</span></p>
+                <p id="current-time"></p>
+            </div>
+            <div class="col-lg-8">
+                column space 10
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <br />
+        Isincode : {{ stock_data.isinCode }} <br />
+        Volume {{ stock_data.totalTradedVolume }} <br />
+        Current Price : {{ stock_data.lastPrice }} <br />
+        Open Price : {{ stock_data.open }} <br />
+        Close Price : {{ stock_data.closePrice }} <br />
+        Previous Close : {{ stock_data.previousClose }} <br />
+        day Low : {{ stock_data.dayLow }} <br />
+        day High : {{ stock_data.dayHigh }} <br />
+        52 wk high : {{ stock_data.high52 }} <br />
+        52 wk low : {{ stock_data.low52 }} <br />
+        percentage Change : {{ stock_data.pChange }} <br />
+    </div>
+</div>
+###
+<br />
 
-    {% block content %}
-        <h1>Individual Stocks</h1>
-        {% for key, value in stock_data.items %}
-            <p>{{key}},{{value}}</p>
-        {% endfor %}
-    {% endblock %}
+{% endblock %}

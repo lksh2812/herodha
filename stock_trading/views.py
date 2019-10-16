@@ -5,7 +5,7 @@ from nsetools import Nse
 
 nse = Nse()
 infosys_stock = nse.get_quote('infy')
-# print(type(infosys_stock))
+
 
 def index(request):
     return render(request, 'index.html')
