@@ -73,8 +73,18 @@
     </div>
 
     <h1 class="text-center">Charts</h1>
-    <div class="row" style="background-color: skyblue;">
-        
+    <div class="row">
+        <div class="col-sm-12" id="stock-chart"></div>
+    </div>
+
+    <div class="row text-center pb-3 border-bottom">
+        <div class="col-lg-4">
+            NSE
+            {{ stock_data.lastPrice}}
+        </div>
+        <div class="col-lg-8">
+            <a href="/buy" class="btn btn-lg btn-success">Buy</a>
+        </div>
     </div>
 
 {% endblock %}
