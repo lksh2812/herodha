@@ -11,5 +11,4 @@ def index(request):
     return render(request, 'index.html')
 
 def get_quote(request):
-    print(type(infosys_stock))
     return render(request, 'get_quote.html', {'stock_data' : infosys_stock})

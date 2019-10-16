@@ -1,6 +1,9 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% block content %}
+
+
 <div class="row">
-    <div class="col">
+    <div class="col-md-6 border-right">
         <h1 class="display-3">{{ stock_data.companyName }}</h1>
         <p class="display-6">
             <span class="font-weight-light">NSE</span> :
@@ -8,6 +11,9 @@
             <span class="font-weight-light">ISIN</span> :
             <span class="font-weight-bold">{{ stock_data.isinCode }}</span> |
         </p>
+    </div>
+    <div class="col-md-6 m-auto p-auto" style="background-color: tomato;">
+        <a href="/buy" class="btn btn-lg btn-success shining btn-block">Buy</a>
     </div>
 </div>
 
@@ -75,16 +81,6 @@
     <h1 class="text-center">Charts</h1>
     <div class="row">
         <div class="col-sm-12" id="stock-chart"></div>
-    </div>
-
-    <div class="row text-center pb-3 border-bottom">
-        <div class="col-lg-4">
-            NSE
-            {{ stock_data.lastPrice}}
-        </div>
-        <div class="col-lg-8">
-            <a href="/buy" class="btn btn-lg btn-success">Buy</a>
-        </div>
     </div>
 
 {% endblock %}
