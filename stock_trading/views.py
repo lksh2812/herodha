@@ -1,13 +1,15 @@
 from django.shortcuts import render
 from nsetools import Nse
-nse = Nse()
 import os
 from elasticsearch import Elasticsearch
 ELASTICSEARCH_URL = os.getenv('ELASTICSEARCH_URL')
 es = Elasticsearch(ELASTICSEARCH_URL)
 import json
 from django.http import JsonResponse
-# Create your views here.
+
+nse = Nse()
+infosys_stock = nse.get_quote('infy')
+
 
 def index(request):
     #Market Action
@@ -34,3 +36,8 @@ def search_stocks(request):
     result = es.search(index='stocks', body={'query': {'multi_match': \
         {'query': stock, 'fields': ['*']}}})
     return JsonResponse({"result": result})
+
+
+def get_quote(request):
+    return render(request, 'get_quote.html', {'stock_data' : infosys_stock})
+
