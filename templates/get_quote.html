@@ -2,5 +2,7 @@
 
     {% block content %}
         <h1>Individual Stocks</h1>
-        {{data}}
+        {% for key, value in stock_data.items %}
+            <p>{{key}},{{value}}</p>
+        {% endfor %}
     {% endblock %}
