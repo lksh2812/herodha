@@ -10,36 +10,71 @@
         </p>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-4">
+
+<div class="row" style="background: blue">
+    <div class="col-md-4">
         <div class="row" >
-            <div class="col-lg-4" style="background: red;">
+            <div class="col-md-4" style="background: red;">
                 <p class="display-5 font-weight-bold">NSE <span class="text-warning">LIVE</span></p>
                 <p id="current-time"></p>
             </div>
-            <div class="col-lg-8">
-                column space 10
+            <div class="col-md-8" style="background: green;">
+                <span class="display-3">{{ stock_data.lastPrice }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="display-5">
+                    {{ stock_data.change }}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="display-5">
+                        {{ stock_data.pChange }} %
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="display-5">
+                    Volume : {{ stock_data.totalTradedVolume }}
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col">
-        <br />
-        Isincode : {{ stock_data.isinCode }} <br />
-        Volume {{ stock_data.totalTradedVolume }} <br />
-        Current Price : {{ stock_data.lastPrice }} <br />
-        Open Price : {{ stock_data.open }} <br />
-        Close Price : {{ stock_data.closePrice }} <br />
-        Previous Close : {{ stock_data.previousClose }} <br />
-        day Low : {{ stock_data.dayLow }} <br />
-        day High : {{ stock_data.dayHigh }} <br />
-        52 wk high : {{ stock_data.high52 }} <br />
-        52 wk low : {{ stock_data.low52 }} <br />
-        percentage Change : {{ stock_data.pChange }} <br />
+<div class="row" style="background: greenyellow;">
+    <div class="col-md-3 border-right">
+        Prev. close {{ stock_data.previousClose }}
+    </div>
+    <div class="col-md-3 border-right">
+        Open Price {{ stock_data.open }}
+    </div>
+    <div class="col-md-3 border-right">
+        Bid Price {{ stock_data.buyPrice1 }}
+    </div>
+    <div class="col-md-3 border-right">
+        offer Price {{ stock_data.sellPrice1}}
     </div>
 </div>
-###
-<br />
+<div class="row" style="background: pink;">
+        <div class="col-md-3 border-right">
+            day Low : {{ stock_data.dayLow }} 
+        </div>
+        <div class="col-md-3 border-right">
+            day High : {{ stock_data.dayHigh }}
+        </div>
+        <div class="col-md-3 border-right">
+            52 week high : {{ stock_data.high52 }}
+        </div>
+        <div class="col-md-3 border-right">
+            52 week low : {{ stock_data.low52 }}
+        </div>
+    </div>
+
+    <h1 class="text-center">Charts</h1>
+    <div class="row" style="background-color: skyblue;">
+        
+    </div>
 
 {% endblock %}
