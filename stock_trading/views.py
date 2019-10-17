@@ -12,7 +12,6 @@ es = Elasticsearch(ELASTICSEARCH_URL)
 
 from nsetools import Nse
 nse = Nse()
-infosys_stock = nse.get_quote('infy')
 
 from .forms import CustomUserCreationForm
 
@@ -81,5 +80,6 @@ def search_stocks(request):
     return JsonResponse({"result": result})
 
 
-def get_quote(request):
-    return render(request, 'get_quote.html', {'stock_data' : infosys_stock})
+def get_quote(request, company_code):
+    stock = nse.get_quote(company_code)
+    return render(request, 'get_quote.html', {'stock_data' : stock})
