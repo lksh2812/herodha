@@ -90,3 +90,6 @@ def get_quote(request, company_code):
     stock = nse.get_quote(company_code)
     return render(request, 'get_quote.html', {'stock_data' : stock})
 
+def buy(request, company_code):
+    stock = nse.get_quote(company_code)
+    pass
