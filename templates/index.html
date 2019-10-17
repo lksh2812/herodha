@@ -3,18 +3,10 @@
     {% block content %}
         <h1>Welcome to Herodha</h1>
         <div>
-            <form class="form" action="/search_stocks" method="post">
-                {% csrf_token %}
-                <div class="from-group">
-                  <label for="stock">Stock code</label>
-                  <input class="form-control" type="text" name=stock>
-                  <button class="btn btn-success btn-block my-1"type="submit">Search</button>
-                </div>
-            </form>
 
             <h3>Market Action</h3>
-            <table class="table">
-                <tr>
+            <table class="table table-striped">
+                <tr class="table-primary">
                     <th>Index</th>
                     <th>Price</th>
                     <th>Price Change</th>
@@ -53,15 +45,15 @@
             </table>
     
             <h3>Top Gainers </h3>
-            <table class="table">
-                <tr>
+            <table class="table table-striped">
+                <tr class="table-success">
                     <th>firm</th>
                     <th>OpenPrice</th>
                     <th>LTP</th>
                     <th>HighPrice</th>
                 </tr>
                 {% for gainer in top_gainers %}
-                    <tr>
+                    <tr class="">
                         <td>{{gainer.symbol}}</td>
                         <td>{{gainer.openPrice}}</td>
                         <td>{{gainer.ltp}}</td>
@@ -73,8 +65,8 @@
             
             
             <h3>Top Losers</h3>
-            <table class="table">
-                <tr>
+            <table class="table table-striped">
+                <tr class="table-danger">
                     <th>firm</th>
                     <th>OpenPrice</th>
                     <th>LTP</th>
