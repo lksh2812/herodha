@@ -130,27 +130,27 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
-SEARCH_SETTINGS = {
-    'connections': {
-        'default': os.getenv('ELASTICSEARCH_URL'),
-    },
-    'indexes': {
-        'stock': {
-            'models': [
+# SEARCH_SETTINGS = {
+#     'connections': {
+#         'default': os.getenv('ELASTICSEARCH_URL'),
+#     },
+#     'indexes': {
+#         'stock': {
+#             'models': [
                 
-            ]
-        }
-    },
-    'settings': {
-        # batch size for ES bulk api operations
-        'chunk_size': 500,
-        # default page size for search results
-        'page_size': 25,
-        # set to True to connect post_save/delete signals
-        'auto_sync': True,
-        # List of models which will never auto_sync even if auto_sync is True
-        'never_auto_sync': [],
-        # if true, then indexes must have mapping files
-        'strict_validation': False
-    }
-}
+#             ]
+#         }
+#     },
+#     'settings': {
+#         # batch size for ES bulk api operations
+#         'chunk_size': 500,
+#         # default page size for search results
+#         'page_size': 25,
+#         # set to True to connect post_save/delete signals
+#         'auto_sync': True,
+#         # List of models which will never auto_sync even if auto_sync is True
+#         'never_auto_sync': [],
+#         # if true, then indexes must have mapping files
+#         'strict_validation': False
+#     }
+# }

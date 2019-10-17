@@ -7,6 +7,7 @@ ELASTICSEARCH_URL = os.getenv('ELASTICSEARCH_URL')
 es = Elasticsearch(ELASTICSEARCH_URL)
 import json
 from django.http import JsonResponse
+from django.shortcuts import redirect
 # Create your views here.
 
 def index(request):
@@ -30,7 +31,12 @@ def index(request):
 
 
 def search_stocks(request):
-    stock = request.POST['stock']
-    result = es.search(index='stocks', body={'query': {'multi_match': \
-        {'query': stock, 'fields': ['*']}}})
-    return JsonResponse({"result": result})
+    try:
+        stock = request.POST['stock']
+        result = es.search(index='stocks', body={'query': {'multi_match': \
+            {'query': stock, 'fields': ['*']}}})
+        result = result['hits']['hits'][0]['_source']['symbol']
+        return redirect("/get_quote/{}".format(result))
+    except:
+        return redirect("/")
+
