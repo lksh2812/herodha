@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div id="bg">
+    <img src="{% static "tech-charts-thinkstock.jpg.png" %}" alt="Hi!" />
+  </div>
+<div class="card text-white bg-dark mb-3 mx-auto mt-5" style="max-width: 36rem;">
+    <div class="card-header">Sign Up</div>
+    <div class="card-body">
+      <form action="/registration/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit" class="btn btn-primary mt-4">
+    </form>
+    </div>
+  </div>
+
+
+<!-- <form action="/registration/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% endif %} -->
+
+{% endblock %}
