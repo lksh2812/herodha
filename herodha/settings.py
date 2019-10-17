@@ -136,6 +136,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 AUTH_USER_MODEL = 'stock_trading.User'
 
+
 # SEARCH_SETTINGS = {
 #     'connections': {
 #         'default': os.getenv('ELASTICSEARCH_URL'),

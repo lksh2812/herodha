@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
-from django.http import JsonResponse
+
 
 import os
 import json
@@ -74,12 +76,17 @@ def index(request):
 
 
 def search_stocks(request):
-    stock = request.POST['stock']
-    result = es.search(index='stocks', body={'query': {'multi_match': \
-        {'query': stock, 'fields': ['*']}}})
-    return JsonResponse({"result": result})
+    try:
+        stock = request.POST['stock']
+        result = es.search(index='stocks', body={'query': {'multi_match': \
+            {'query': stock, 'fields': ['*']}}})
+        result = result['hits']['hits'][0]['_source']['symbol']
+        return redirect("/get_quote/{}".format(result))
+    except:
+        return redirect("/")
 
 
 def get_quote(request, company_code):
     stock = nse.get_quote(company_code)
     return render(request, 'get_quote.html', {'stock_data' : stock})
+
