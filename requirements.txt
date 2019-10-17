@@ -1,4 +1,5 @@
 confusable-homoglyphs==3.2.0
+dateutils==0.6.6
 Django==2.2.6
 django-braces==1.13.0
 django-crispy-forms==1.7.2
@@ -7,7 +8,9 @@ django-postgres-copy==2.4.2
 django-redis==4.10.0
 django-registration==3.0.1
 djangorestframework==3.10.3
+nsetools==1.0.10
 psycopg2==2.8.3
+python-dateutil==2.8.0
 python-dotenv==0.10.3
 pytz==2019.2
 redis==3.3.8

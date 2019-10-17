@@ -81,12 +81,12 @@ WSGI_APPLICATION = 'herodha.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'herodha',
-        'USER': 'postgres',
-        'PASSWORD': os.getenv('PASSWORD'),
-        'HOST': os.getenv('HOST'),
-        'PORT': os.getenv('PORT'),
+        'ENGINE': os.getenv("DB_ENGINE"),
+        'NAME': os.getenv("DB_NAME"),
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'HOST': os.getenv("DB_HOST"),
+        'PORT': os.getenv("DB_PORT"),
     }
 }
 
@@ -133,4 +133,31 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
+
 AUTH_USER_MODEL = 'stock_trading.User'
+
+# SEARCH_SETTINGS = {
+#     'connections': {
+#         'default': os.getenv('ELASTICSEARCH_URL'),
+#     },
+#     'indexes': {
+#         'stock': {
+#             'models': [
+                
+#             ]
+#         }
+#     },
+#     'settings': {
+#         # batch size for ES bulk api operations
+#         'chunk_size': 500,
+#         # default page size for search results
+#         'page_size': 25,
+#         # set to True to connect post_save/delete signals
+#         'auto_sync': True,
+#         # List of models which will never auto_sync even if auto_sync is True
+#         'never_auto_sync': [],
+#         # if true, then indexes must have mapping files
+#         'strict_validation': False
+#     }
+# }
+

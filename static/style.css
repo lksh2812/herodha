@@ -15,3 +15,12 @@
     min-width: 50%;
     min-height: 50%;
   }
+
+body{
+    background: #FFFFFF;  /* fallback for old browsers */    
+}
+
+/**
+ * Icon
+ */
+
