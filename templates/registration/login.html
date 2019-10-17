@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% load crispy_forms_tags %}
 
 {% if form.errors %}
   <p>Your username and password didn't match. Please try again.</p>
@@ -15,33 +16,29 @@
   {% endif %}
 {% endif %}
 
-<div class="col-sm-6">
-    <div class="panel panel-default">
-        <div class="panel-heading">Login</div>
-        <div class="panel-body">
-            <form method="post" action="{% url 'login' %}">
-            {% csrf_token %}
-            <table>
+<div class="card text-white bg-dark mb-3 mx-auto mt-5" style="max-width: 36rem;">
+  <div class="card-header">
+    Login
+  </div>
+  <div class="card-body">
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      <label for="id_username">Username</label>
+      <input id="id_username" name="username" type="text" class="form-control">
 
-            <tr>
-            <td>{{ form.username.label_tag }}</td>
-            <td>{{ form.username }}</td>
-            </tr>
-
-            <tr>
-            <td>{{ form.password.label_tag }}</td>
-            <td>{{ form.password }}</td>
-            </tr>
-            </table>
-
-            <input type="submit" value="login" />
-            <input type="hidden" name="next" value="{{ next }}" />
-            </form> 
-        </div>
-    </div>
+      <label for="id_password">Password</label>
+      <input id="id_password" name="password" type="password" class="form-control">
+    
+      <input type="submit" value="login" class="btn btn-primary mt-4" />
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+  </div>
 </div>
 
+
+
 {# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+<div class="mx-auto " style="max-width: 36rem;">
+<p class="mx-auto"><a href="{% url 'password_reset' %}">Lost password?</a></p></div>
 
 {% endblock %}
