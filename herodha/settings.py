@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import os
+import os, psycopg2
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -130,6 +133,10 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
+
+AUTH_USER_MODEL = 'stock_trading.User'
+
+
 # SEARCH_SETTINGS = {
 #     'connections': {
 #         'default': os.getenv('ELASTICSEARCH_URL'),
@@ -154,3 +161,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 #         'strict_validation': False
 #     }
 # }
+
