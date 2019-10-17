@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import os
+import os, psycopg2
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -130,27 +133,31 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
-SEARCH_SETTINGS = {
-    'connections': {
-        'default': os.getenv('ELASTICSEARCH_URL'),
-    },
-    'indexes': {
-        'stock': {
-            'models': [
+
+AUTH_USER_MODEL = 'stock_trading.User'
+
+# SEARCH_SETTINGS = {
+#     'connections': {
+#         'default': os.getenv('ELASTICSEARCH_URL'),
+#     },
+#     'indexes': {
+#         'stock': {
+#             'models': [
                 
-            ]
-        }
-    },
-    'settings': {
-        # batch size for ES bulk api operations
-        'chunk_size': 500,
-        # default page size for search results
-        'page_size': 25,
-        # set to True to connect post_save/delete signals
-        'auto_sync': True,
-        # List of models which will never auto_sync even if auto_sync is True
-        'never_auto_sync': [],
-        # if true, then indexes must have mapping files
-        'strict_validation': False
-    }
-}
+#             ]
+#         }
+#     },
+#     'settings': {
+#         # batch size for ES bulk api operations
+#         'chunk_size': 500,
+#         # default page size for search results
+#         'page_size': 25,
+#         # set to True to connect post_save/delete signals
+#         'auto_sync': True,
+#         # List of models which will never auto_sync even if auto_sync is True
+#         'never_auto_sync': [],
+#         # if true, then indexes must have mapping files
+#         'strict_validation': False
+#     }
+# }
+
