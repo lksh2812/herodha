@@ -10,4 +10,5 @@ urlpatterns = [
     path('get_quote/<str:company_code>', views.get_quote),
     path('buy/<str:company_code>/', views.buy),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('sell/<str:company_code>/', views.sell),
 ]
