@@ -4,7 +4,7 @@ from nsetools import Nse
 # Create your views here.
 
 nse = Nse()
-infosys_stock = nse.get_quote('infy')
+infosys_stock = nse.get_quote('hdfc')
 
 
 def index(request):

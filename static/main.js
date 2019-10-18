@@ -26,10 +26,15 @@ window.onload = () =>{
 }
 
 const getChart = (companyCode) =>{
-  fetch(`https://www.quandl.com/api/v3/datasets/NSE/${companyCode}?start_date=2018-01-04&end_date=2019-01-04&column_index=2&api_key=mCrUZxchD8W8KhzDRuAo`).then(res=>res.json()).then(result=>drawChart(result['dataset']['data']))
+  fetch(`https://www.quandl.com/api/v3/datasets/NSE/${companyCode}?start_date=2018-01-04&end_date=2019-01-04&column_index=2&api_key=mCrUZxchD8W8KhzDRuAo`).then(res=>res.json()).then(result=>drawChart(chartData = result['dataset']['data'], companyCode=companyCode))
+  .then(()=>{
+      let xChartLabel = document.querySelector('.highcharts-xaxis-labels');
+        // console.log(xChartLabel)
+        xChartLabel.style.display = "none"
+  })
 }
 
-const drawChart = (chartData) =>{
+const drawChart = (chartData, companyCode) =>{
   let xAxis = [],
       yAxis = [];
   chartData.forEach(chartDataRow=>{
@@ -42,13 +47,14 @@ const drawChart = (chartData) =>{
             type: 'line'
         },
         title: {
-            text: 'Infosys '
+            text: companyCode
         },
         xAxis: {
             categories: xAxis
         },
+
         series: [{
-            name : "Infosys",
+            name : companyCode,
             data: yAxis
         }]
     });
