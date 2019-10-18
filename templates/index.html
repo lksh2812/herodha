@@ -2,4 +2,85 @@
 
     {% block content %}
         <h1>Welcome to Herodha</h1>
+        <div>
+
+            <h3>Market Action</h3>
+            <table class="table table-striped">
+                <tr class="table-primary">
+                    <th>Index</th>
+                    <th>Price</th>
+                    <th>Price Change</th>
+                    <th>percentageChange</th>
+                </tr>
+                <tr>
+                    <td>{{nifty_50.name}}   </td>
+                    <td>{{nifty_50.lastPrice}}</td>
+                    <td>{{nifty_50.change}}</td>
+                    <td>{{nifty_50.pChange }}</td>
+                </tr>
+                <tr>
+                    <td>{{nifty_auto.name}}   </td>
+                    <td>{{nifty_auto.lastPrice}}</td>
+                    <td>{{nifty_auto.change}}</td>
+                    <td>{{nifty_auto.pChange }}</td>
+                </tr>
+                <tr>
+                    <td>{{nifty_bank.name}}   </td>
+                    <td>{{nifty_bank.lastPrice}}</td>
+                    <td>{{nifty_bank.change}}</td>
+                    <td>{{nifty_bank.pChange }}</td>
+                </tr>
+                <tr>
+                    <td>{{nifty_it.name}}   </td>
+                    <td>{{nifty_it.lastPrice}}</td>
+                    <td>{{nifty_it.change}}</td>
+                    <td>{{nifty_it.pChange }}</td>
+                </tr>
+                <tr>
+                    <td>{{nifty_pharma.name}}   </td>
+                    <td>{{nifty_pharma.lastPrice}}</td>
+                    <td>{{nifty_pharma.change}}</td>
+                    <td>{{nifty_pharma.pChange }}</td>
+                </tr>
+            </table>
+    
+            <h3>Top Gainers </h3>
+            <table class="table table-striped">
+                <tr class="table-success">
+                    <th>firm</th>
+                    <th>OpenPrice</th>
+                    <th>LTP</th>
+                    <th>HighPrice</th>
+                </tr>
+                {% for gainer in top_gainers %}
+                    <tr class="">
+                        <td>{{gainer.symbol}}</td>
+                        <td>{{gainer.openPrice}}</td>
+                        <td>{{gainer.ltp}}</td>
+                        <td>{{gainer.highPrice}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            
+            
+            
+            <h3>Top Losers</h3>
+            <table class="table table-striped">
+                <tr class="table-danger">
+                    <th>firm</th>
+                    <th>OpenPrice</th>
+                    <th>LTP</th>
+                    <th>HighPrice</th>
+                </tr>
+                {% for loser in top_losers %}
+                    <tr>
+                        <td>{{loser.symbol}}</td>
+                        <td>{{loser.openPrice}}</td>
+                        <td>{{loser.ltp}}</td>
+                        <td>{{loser.highPrice}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            
+        </div>
     {% endblock %}
