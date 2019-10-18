@@ -86,3 +86,12 @@ hr{
   box-shadow: 0px 0px 0px rgba( 15, 165, 60, 0.0 );
   background: rgba( 20, 224, 133, 1 );
 }
+
+@media only screen and (max-width: 770px) {
+  #buy-button{
+    width: 100%;
+  }
+  .center-on-smallscreen{
+    text-align: center;
+  }
+}

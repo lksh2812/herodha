@@ -84,7 +84,7 @@ const get_current_price = (companyCode) =>{
             currentPrice.innerText = stockData['lastPrice']
             stockDataChange.innerText = stockData['change']
             stockDataChange.style.color = color
-            stockDataPchange.innerText = `( ${stockData['pChange']} % )`
+            stockDataPchange.innerText = ` ( ${stockData['pChange']} % )`
             stockDataPchange.style.color = color
             volume.innerText = stockData['totalTradedVolume']
             bidPrice.innerText = stockData['buyPrice1']
