@@ -63,7 +63,7 @@ class SignUpView(CreateView):
     template_name = 'registration.html'
 
 
-@cache_page(CACHE_TTL)
+# @cache_page(CACHE_TTL)
 def index(request):
     #Market Action
     nifty_50 = nse.get_index_quote('nifty 50')
@@ -77,6 +77,7 @@ def index(request):
 
     #Top Losers
     top_losers = nse.get_top_losers()
+    print(request.user.username)
 
     return render(request, 'index.html', {'nifty_50':nifty_50, \
         'nifty_auto':nifty_auto, 'nifty_bank':nifty_bank, \
@@ -105,18 +106,19 @@ def buy(request, company_code):
     buyer_id = current_user.id
     company_name = request.POST.get("name")
     company_code = request.POST.get('symbol')
-    last_price = request.POST.get('lastPrice')
-    quantity = request.POST.get('qty')
-    total = request.POST.get('total')
+    last_price = float(request.POST.get('lastPrice'))
+    quantity = int(request.POST.get('qty'))
+    total = float(request.POST.get('total'))
     available_funds = current_user.funds 
+    print(buyer_id)
     if available_funds < total:
         return "Insuffient funds!"
     else:
         available_funds -= total
-        transaction = BuyTransaction(user_id=buyer_id, company_name=company_name, company_code=company_code, qty=quantity, last_price=last_price, Total=total)
+        transaction = BuyTransaction(user_id=current_user, company_name=company_name, company_code=company_code, qty=quantity, last_price=last_price, Total=total)
         transaction.save()
 
     # print(company_name)
     # print(company_code)
     # print(total)
-    return redirect('get_quote', company_code=company_code)
+    return redirect('/get_quote/{}'.format(company_code))
