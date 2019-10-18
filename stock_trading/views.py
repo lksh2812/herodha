@@ -4,6 +4,9 @@ from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
+from django.contrib.auth.decorators import login_required
+from .models import BuyTransaction
+from django.contrib import messages
 
 
 import os
@@ -74,6 +77,7 @@ def index(request):
 
     #Top Losers
     top_losers = nse.get_top_losers()
+    print(request.user.username)
 
     return render(request, 'index.html', {'nifty_50':nifty_50, \
         'nifty_auto':nifty_auto, 'nifty_bank':nifty_bank, \
@@ -96,3 +100,27 @@ def get_quote(request, company_code):
     stock = nse.get_quote(company_code)
     return render(request, 'get_quote.html', {'stock_data' : stock})
 
+@login_required(login_url='/accounts/login/')
+def buy(request, company_code):
+    current_user = request.user
+    buyer_id = current_user.id
+    company_name = request.POST.get("name")
+    company_code = request.POST.get('symbol')
+    last_price = float(request.POST.get('lastPrice'))
+    quantity = int(request.POST.get('qty'))
+    total = float(request.POST.get('total'))
+    available_funds = current_user.funds 
+    print(buyer_id)
+    if available_funds < total:
+        messages.error(request, 'Insufficient funds.')
+        return redirect('/get_quote/{}'.format(company_code))
+    else:
+        available_funds -= total
+        transaction = BuyTransaction(user_id=current_user, company_name=company_name, company_code=company_code, qty=quantity, last_price=last_price, Total=total)
+        transaction.save()
+        messages.info(request, 'Your transaction was successful.')
+
+    # print(company_name)
+    # print(company_code)
+    # print(total)
+    return redirect('/get_quote/{}'.format(company_code))
