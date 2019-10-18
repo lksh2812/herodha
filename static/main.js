@@ -74,14 +74,24 @@ const get_current_price = (companyCode) =>{
             let volume = document.querySelector("#volume");
             let bidPrice = document.querySelector("#bid-price");
             let offerPrice = document.querySelector("#offer-price");
+            let pastCurrentPrice = Number(currentPrice.innerText)
+            let nowCurrentPrice = Number(stockData['lastPrice'])
+            let color = "#00BB6E";
+            if (pastCurrentPrice > nowCurrentPrice){
+                color = "#F34459";
+            }
+            currentPrice.parentElement.style.background = color
             currentPrice.innerText = stockData['lastPrice']
             stockDataChange.innerText = stockData['change']
+            stockDataChange.style.color = color
             stockDataPchange.innerText = `( ${stockData['pChange']} % )`
+            stockDataPchange.style.color = color
             volume.innerText = stockData['totalTradedVolume']
             bidPrice.innerText = stockData['buyPrice1']
             offerPrice.innerText = stockData['sellPrice1']
             console.log("api aa raha hai")
         })
+        .catch(err=>console.log("Abey err dekh "+err))
 
     }
 }
