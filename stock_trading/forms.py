@@ -18,3 +18,5 @@ class CustomUserCreationForm(UserCreationForm):
        self.fields['password2'].help_text = None
        self.fields['password2'].widget.attrs.update({'class':'form-control','placeholder':'Confirm Password'})
 
+
+
