@@ -60,7 +60,7 @@ class SignUpView(CreateView):
     template_name = 'registration.html'
 
 
-@cache_page(CACHE_TTL)
+# @cache_page(CACHE_TTL)
 def index(request):
     #Market Action
     nifty_50 = nse.get_index_quote('nifty 50')
