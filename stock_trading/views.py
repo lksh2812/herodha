@@ -30,7 +30,6 @@ CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 # from django.contrib.auth.models import User
 
 
-
 # def registration(request):
 #     # if this is a POST request we need to process the form data
 #     if request.method == 'POST':
