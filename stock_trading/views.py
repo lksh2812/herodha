@@ -17,6 +17,11 @@ nse = Nse()
 
 from .forms import CustomUserCreationForm
 
+from django.conf import settings
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.views.decorators.cache import cache_page
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
+
 # Create your views here.
 # from .forms import RegistrationForm
 # from django.contrib.auth.models import User
@@ -55,6 +60,7 @@ class SignUpView(CreateView):
     template_name = 'registration.html'
 
 
+@cache_page(CACHE_TTL)
 def index(request):
     #Market Action
     nifty_50 = nse.get_index_quote('nifty 50')

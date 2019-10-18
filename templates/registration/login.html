@@ -1,10 +1,15 @@
-{% extends "base.html" %}
-
+{% extends "base_bg.html" %}
+{% load static %}
 {% block content %}
-{% load crispy_forms_tags %}
+
 
 {% if form.errors %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
   <p>Your username and password didn't match. Please try again.</p>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 {% endif %}
 
 {% if next %}
@@ -32,13 +37,8 @@
       <input type="submit" value="login" class="btn btn-primary mt-4" />
       <input type="hidden" name="next" value="{{ next }}" />
     </form>
+    <div class="mt-2"><a href="{% url 'password_reset' %}">Lost password?</a></div>
   </div>
 </div>
-
-
-
-{# Assumes you setup the password_reset view in your URLconf #}
-<div class="mx-auto " style="max-width: 36rem;">
-<p class="mx-auto"><a href="{% url 'password_reset' %}">Lost password?</a></p></div>
 
 {% endblock %}
