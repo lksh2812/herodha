@@ -104,6 +104,11 @@ def get_quote(request, company_code):
 def buy(request, company_code):
     current_user = request.user
     buyer_id = current_user.id
+    try:
+        bt = BuyTransaction.objects.get(user_id=buyer_id, company_code=company_code)
+    except BuyTransaction.DoesNotExist:
+        bt = None
+    
     company_name = request.POST.get("name")
     company_code = request.POST.get('symbol')
     last_price = float(request.POST.get('lastPrice'))
@@ -116,11 +121,39 @@ def buy(request, company_code):
         return redirect('/get_quote/{}'.format(company_code))
     else:
         available_funds -= total
-        transaction = BuyTransaction(user_id=current_user, company_name=company_name, company_code=company_code, qty=quantity, last_price=last_price, Total=total)
-        transaction.save()
-        messages.info(request, 'Your transaction was successful.')
+        if bt is None:
+            
+            transaction = BuyTransaction(user_id=current_user, company_name=company_name, company_code=company_code, qty=quantity, last_price=last_price, Total=total, avg_price=last_price)
+            transaction.save()
+            messages.info(request, 'Your transaction was successful.')
+        else:
+            old_quantity = bt.qty
+            new_quantity = old_quantity + quantity
+            new_total = new_quantity*last_price
+            avg_price = bt.avg_price
+            new_avg_price = ((old_quantity*avg_price)+(quantity*last_price))/(old_quantity+quantity)
+            bt.qty = new_quantity
+            bt.last_price = last_price
+            bt.Total = new_total
+            bt.avg_price = new_avg_price
+            bt.save()
+            messages.info(request, 'Your transaction was successful.')
+            # bt.update(qty=new_quantity, last_price=last_price, Total=new_total)
+
 
     # print(company_name)
     # print(company_code)
     # print(total)
     return redirect('/get_quote/{}'.format(company_code))
+
+# @login_required(login_url='/accounts/login')
+# def sell(request, company_code):
+#     current_user = request.user
+#     company_name = request.POST.get("name")
+#     company_code = request.POST.get('symbol')
+#     last_price = float(request.POST.get('lastPrice'))
+#     quantity = int(request.POST.get('qty'))
+#     selling_price = float(request.POST.get('total'))
+#     profit = selling_price - last_price*quantity
+
+    
