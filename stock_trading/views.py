@@ -112,11 +112,13 @@ def buy(request, company_code):
     available_funds = current_user.funds 
     print(buyer_id)
     if available_funds < total:
-        return "Insuffient funds!"
+        messages.error(request, 'Insufficient funds.')
+        return redirect('/get_quote/{}'.format(company_code))
     else:
         available_funds -= total
         transaction = BuyTransaction(user_id=current_user, company_name=company_name, company_code=company_code, qty=quantity, last_price=last_price, Total=total)
         transaction.save()
+        messages.info(request, 'Your transaction was successful.')
 
     # print(company_name)
     # print(company_code)
