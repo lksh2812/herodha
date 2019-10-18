@@ -123,3 +123,7 @@ def buy(request, company_code):
     # print(company_code)
     # print(total)
     return redirect('/get_quote/{}'.format(company_code))
+
+def get_current_price(request, company_code):
+    print(company_code)
+    return HttpResponse(company_code)
