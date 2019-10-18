@@ -1,4 +1,3 @@
-console.log("Hello");
 window.onload = () =>{
     // let currentTime = Date(Date.now()),
     let companyCode = document.querySelector('#companyCode').innerText
@@ -22,12 +21,14 @@ window.onload = () =>{
         }else{
             console.log("Cannot find it")
         }
-        getChart(companyCode)
+    getChart(companyCode);
+    setInterval(get_current_price(companyCode), 3000);
 }
 
 const getChart = (companyCode) =>{
   fetch(`https://www.quandl.com/api/v3/datasets/NSE/${companyCode}?start_date=2018-01-04&end_date=2019-01-04&column_index=2&api_key=mCrUZxchD8W8KhzDRuAo`).then(res=>res.json()).then(result=>drawChart(chartData = result['dataset']['data'], companyCode=companyCode))
   .then(()=>{
+      //to delete date's in x axis
       let xChartLabel = document.querySelector('.highcharts-xaxis-labels');
         // console.log(xChartLabel)
         xChartLabel.style.display = "none"
@@ -60,5 +61,17 @@ const drawChart = (chartData, companyCode) =>{
     });
 }
 
+const get_current_price = (companyCode) =>{
+    return () =>{
+        let host = window.location.host;
+        fetch(`http://${host}/get_current_price/${companyCode}`)
+        .then(res=>res.json())
+        .then(result=>result['stock_data']['lastPrice'])
+        .then(stockData=>{
+            let currentPrice = document.querySelector("#current-price");
+            let 
+            currentPrice.innerText = stockData
+        })
 
-
+    }
+}
