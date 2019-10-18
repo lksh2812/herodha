@@ -76,7 +76,7 @@ const get_current_price = (companyCode) =>{
             let offerPrice = document.querySelector("#offer-price");
             currentPrice.innerText = stockData['lastPrice']
             stockDataChange.innerText = stockData['change']
-            stockDataPchange.innerText = stockData['pChange']
+            stockDataPchange.innerText = `( ${stockData['pChange']} % )`
             volume.innerText = stockData['totalTradedVolume']
             bidPrice.innerText = stockData['buyPrice1']
             offerPrice.innerText = stockData['sellPrice1']
