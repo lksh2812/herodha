@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
-from .models import BuyTransaction
+from .models import BuyTransaction, SellTransaction
 from django.contrib import messages
 
 
@@ -146,14 +146,38 @@ def buy(request, company_code):
     # print(total)
     return redirect('/get_quote/{}'.format(company_code))
 
-# @login_required(login_url='/accounts/login')
-# def sell(request, company_code):
-#     current_user = request.user
-#     company_name = request.POST.get("name")
-#     company_code = request.POST.get('symbol')
-#     last_price = float(request.POST.get('lastPrice'))
-#     quantity = int(request.POST.get('qty'))
-#     selling_price = float(request.POST.get('total'))
-#     profit = selling_price - last_price*quantity
+@login_required(login_url='/accounts/login')
+def sell(request, company_code):
+    current_user = request.user
+    buyer_id = current_user.id
+    bt = BuyTransaction.objects.get(user_id=buyer_id, company_code=company_code)
+    avg_price = bt.avg_price
+
+    company_name = request.POST.get("name")
+    company_code = request.POST.get('symbol')
+    last_price = float(request.POST.get('lastPrice'))
+    quantity = int(request.POST.get('qty'))
+
+    old_quantity = bt.qty
+    new_quantity = old_quantity - quantity
+    sell_value = float(request.POST.get('total'))
+    old_total = bt.Total
+    new_total = old_total - sell_value
+    avg_price = bt.avg_price
+    profit = (last_price - avg_price)*quantity
+    bt.qty = new_quantity
+    bt.last_price = last_price
+    bt.Total = new_total
+    bt.save()
+
+    sell_transaction = SellTransaction(company_name=company_name, company_code=company_code, qty=quantity, buying_price=avg_price, selling_price=last_price, profit=profit,  total_selling=sell_value, user_id=current_user)
+
+    current_user.funds += sell_value
+
+    return redirect('/get_quote/{}'.format(company_code))
+
+
+
+    
 
     
