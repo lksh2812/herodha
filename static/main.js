@@ -1,6 +1,6 @@
 window.onload = () =>{
     // let currentTime = Date(Date.now()),
-    let companyCode = document.querySelector('#companyCode').innerText
+    let companyCode = document.querySelector('#company-code').innerText
     let currentTime = new Date(),
         currentTimeDom = document.querySelector("#current-time");
         if(currentTimeDom){
@@ -66,11 +66,21 @@ const get_current_price = (companyCode) =>{
         let host = window.location.host;
         fetch(`http://${host}/get_current_price/${companyCode}`)
         .then(res=>res.json())
-        .then(result=>result['stock_data']['lastPrice'])
+        .then(result=>result['stock_data'])
         .then(stockData=>{
             let currentPrice = document.querySelector("#current-price");
-            let 
-            currentPrice.innerText = stockData
+            let stockDataChange = document.querySelector("#stock-data-change");
+            let stockDataPchange = document.querySelector("#stock-data-p-change");
+            let volume = document.querySelector("#volume");
+            let bidPrice = document.querySelector("#bid-price");
+            let offerPrice = document.querySelector("#offer-price");
+            currentPrice.innerText = stockData['lastPrice']
+            stockDataChange.innerText = stockData['change']
+            stockDataPchange.innerText = stockData['pChange']
+            volume.innerText = stockData['totalTradedVolume']
+            bidPrice.innerText = stockData['buyPrice1']
+            offerPrice.innerText = stockData['sellPrice1']
+            console.log("api aa raha hai")
         })
 
     }

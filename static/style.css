@@ -18,9 +18,17 @@
 
 body{
     background: #FFFFFF;  /* fallback for old browsers */    
+    font-family: 'Signika', sans-serif;
 }
 
-/**
- * Icon
- */
+#nse-live-row{
+  background: #F4F7F9
+}
+#stock-chart-background{
+  background : #1765A5
+}
+
+#company-name{
+  font-family: 'Fjalla One', sans-serif;
+}
 
