@@ -23,7 +23,7 @@ window.onload = () => {
         console.log("Cannot find it")
     }
     addToCartDom.addEventListener('click', addToCart(companyCode));
-    removeFromCartDom.addEventListener('click', removeFromCart(companyCode));
+    // removeFromCartDom.addEventListener('click', removeFromCart(companyCode));
 
     getChart(companyCode);
     setInterval(get_current_price(companyCode), 3000);
