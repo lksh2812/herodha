@@ -159,6 +159,9 @@ def sell(request, company_code):
     quantity = int(request.POST.get('qty'))
 
     old_quantity = bt.qty
+    if quantity > old_quantity:
+        messages.error(request, "Not enough stock quantity to sell.")
+        return redirect('/get_quote/{}'.format(company_code))
     new_quantity = old_quantity - quantity
     sell_value = float(request.POST.get('total'))
     old_total = bt.Total
@@ -171,7 +174,8 @@ def sell(request, company_code):
     bt.save()
 
     sell_transaction = SellTransaction(company_name=company_name, company_code=company_code, qty=quantity, buying_price=avg_price, selling_price=last_price, profit=profit,  total_selling=sell_value, user_id=current_user)
-
+    sell_transaction.save()
+    messages.info(request, 'Your transaction was successful.')
     current_user.funds += sell_value
 
     return redirect('/get_quote/{}'.format(company_code))
