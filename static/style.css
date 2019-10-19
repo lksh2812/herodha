@@ -43,7 +43,7 @@ hr {
   height: 2rem;
 }
 #buy-button {
-  width: 80%;
+  width: 50%;
   background: transparent;
   border: 0;
   padding: 0;
@@ -92,7 +92,7 @@ hr {
 
 @media only screen and (max-width: 770px) {
   #buy-button {
-    width: 100%;
+    width: 50%;
   }
   .center-on-smallscreen {
     text-align: center;

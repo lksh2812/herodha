@@ -1,7 +1,9 @@
 window.onload = () => {
     let companyCode = document.querySelector('#company-code').innerText
     let currentTime = new Date(),
-        currentTimeDom = document.querySelector("#current-time");
+        currentTimeDom = document.querySelector("#current-time"),
+        addToCartDom = document.querySelector("#add-to-cart"),
+        removeFromCartDom = document.querySelector('#remove-from-cart');
     if (currentTimeDom) {
         let month = new Array();
         month[0] = "Jan";
@@ -20,6 +22,9 @@ window.onload = () => {
     } else {
         console.log("Cannot find it")
     }
+    addToCartDom.addEventListener('click', addToCart(companyCode));
+    removeFromCartDom.addEventListener('click', removeFromCart(companyCode));
+
     getChart(companyCode);
     setInterval(get_current_price(companyCode), 3000);
 }
@@ -93,3 +98,29 @@ const get_current_price = (companyCode) => {
 
     }
 }
+
+
+const addToCart = (companyCode) =>{
+    return ()=>{
+        let host = window.location.hostname
+        console.log(host)
+        fetch(`http://127.0.0.1:8000/add_to_cart/`,{
+            method : 'POST',
+            body : JSON.stringify(companyCode)
+        })
+        .then(res=>res.status)
+    }
+}
+
+const removeFromCart = (companyCode) =>{
+    return ()=>{
+        let host = window.location.hostname
+        console.log(host)
+        fetch(`http://127.0.0.1:8000/remove_from_cart/`,{
+            method : 'POST',
+            body : JSON.stringify(companyCode)
+        })
+        .then(res=>res.status)
+    }
+}
+
