@@ -26,6 +26,12 @@ async function getCurrentPriceAndProfit (companyCode, currentPriceDom, profitDom
     sellingPrice = Number(totalDom.innerText)
     buyingPrice = qty * currentPrice
     profit = sellingPrice - buyingPrice
+    let color = "#00BB6E";
+    if(profit < 0){
+        color = "#F34459";
+    }
     profitDom.innerText = Math.round(profit * 100) / 100;
+    profitDom.style.color = "white";
+    profitDom.style.background = color;
 }
 
