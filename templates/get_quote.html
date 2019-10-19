@@ -103,12 +103,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="display-5">
-                        <i class="fas fa-sort-up"></i><span class="font-weight-bold" id="stock-data-change">{{ stock_data.change }}</span><span class="font-weight-bold" id="stock-data-p-change"> ( {{ stock_data.pChange }} % ) </span>
+                        <span class="font-weight-bold" id="stock-data-change">
+                            <i class="fas fa-sort-up"></i>
+                             {{ stock_data.change }}</span><span class="font-weight-bold" id="stock-data-p-change"> ( {{ stock_data.pChange }} % ) </span>
                 </div>
             </div>
-             <div class="col-md-6">
+             <div class="col-md-6 my-auto">
                 <div class="display-5">
-                    <i class="fas fa-sort-amount-up-alt"></i>
+                    <i id="volume-icon" class="fas fa-database"></i>
                     Volume : <span class="font-weight-bold" id="volume">{{ stock_data.totalTradedVolume }}</span> 
                 </div>
             </div>
@@ -161,6 +163,8 @@
           $('input[name="total"]').val(total)
         })
       </script>
-  
+      {% load static %}
+      <script type="text/javascript" src="{% static 'main.js'%}"></script>
+
 
 {% endblock %}
