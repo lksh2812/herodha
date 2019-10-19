@@ -201,3 +201,6 @@ def get_current_price(request, company_code):
     stock_data = nse.get_quote(company_code)
     return JsonResponse({'stock_data' : stock_data})
 
+
+def dashboard(request):
+    return render(request, 'dashboard.html')
