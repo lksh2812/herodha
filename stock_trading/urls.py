@@ -14,4 +14,6 @@ urlpatterns = [
     path('sell/<str:company_code>/', views.sell),
     path('add_to_cart/', views.add_company),
     path('remove_from_cart/', views.remove_company),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('dashboard/past_holdings', views.past_holdings, name='past_holdings'),
 ]
