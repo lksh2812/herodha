@@ -1,241 +1,165 @@
-{% extends 'base.html' %} {% block content %} {% if messages %}
+{% extends 'base.html' %} 
+{% block content %}
+{% if messages %}
 <ul class="messages">
-  {% for message in messages %}
-  <!-- <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> -->
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    {{ message }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  {% endfor %}
+    {% for message in messages %}
+    <!-- <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> -->
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}
 </ul>
 {% endif %}
 
 <div class="row">
-  <div class="col-md-6 border-right">
-    <div id="company-name" class="display-4 ">{{ stock_data.companyName }}</div>
-    <p class="display-6">
-      <span class="font-weight-light">NSE</span> :
-      <span id="company-code" class="font-weight-bold">{{
-        stock_data.symbol
-      }}</span>
-      | <span class="font-weight-light">ISIN</span> :
-      <span class="font-weight-bold">{{ stock_data.isinCode }}</span> |
-    </p>
-  </div>
-  <div class="col-md-6 m-auto p-auto text-center">
-    <!-- Button trigger modal -->
-    <button
-      id="buy-button"
-      class="btn-block"
-      type="button"
-      data-toggle="modal"
-      data-target="#exampleModalCenter"
-    >
-      Buy
+    <div class="col-md-6 border-right">
+        <div id="company-name" class="display-4 ">{{ stock_data.companyName }}</div>
+        <p class="display-6">
+            <span class="font-weight-light">NSE</span> :
+            <span id="company-code" class="font-weight-bold">{{ stock_data.symbol }}</span> |
+            <span class="font-weight-light">ISIN</span> :
+            <span class="font-weight-bold">{{ stock_data.isinCode }}</span> |
+        </p>
+    </div>
+    <div class="col-md-6 m-auto p-auto text-center">
+        
+        <!-- Button trigger modal -->
+    <button id="buy-button" class="btn-block" type="button" data-toggle="modal" data-target="#exampleModalCenter">
+        Buy
     </button>
-
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModalCenter"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalCenterTitle"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Buy Shares</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <form
-            class="form m-1"
-            action="/buy/{{ stock_data.symbol }}/"
-            method="POST"
-          >
-            {% csrf_token %}
-            <div class="modal-body">
-              <div class="form-group">
-                <label for="companyName">Company</label>
-                <input
-                  class="form-control disabled"
-                  type="text"
-                  name="name"
-                  value="{{ stock_data.companyName }}"
-                  readonly
-                />
-              </div>
-              <div class="form-group">
-                <label for="companyName">Symbol</label>
-                <input
-                  class="form-control disabled"
-                  type="text"
-                  name="symbol"
-                  value="{{ stock_data.symbol }}"
-                  readonly
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="companyName">Current price</label>
-                <input
-                  class="form-control disabled"
-                  type="text"
-                  name="lastPrice"
-                  value="{{ stock_data.lastPrice }}"
-                  readonly
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="qty">Quantity</label>
-                <input
-                  class="form-control"
-                  type="number"
-                  name="qty"
-                  min="1"
-                  required
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="total">Total</label>
-                <input
-                  class="form-control disabled"
-                  type="text"
-                  name="total"
-                  readonly
-                />
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Cancel
-              </button>
-              <!-- <a href="{% url 'buy' }" class="btn btn-success shining">Confirm</a> -->
-              <!-- {% if form.field.value.total > 100 %} -->
-              <!-- <button type="submit" class="btn btn-primary" disabled>Confirm</button> -->
-              <!-- {% else %} -->
-              <button type="submit" class="btn btn-primary">Confirm</button>
-              <!-- {% endif %} -->
-            </div>
-          </form>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Buy Shares</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <form class="form m-1" action="/buy/{{ stock_data.symbol }}/" method="POST">
+            {% csrf_token %}
+        <div class="modal-body">
+                <div class="form-group">
+                        <label for="companyName">Company</label>
+                        <input class="form-control disabled" type="text" name="name" value="{{ stock_data.companyName }}" readonly>
+                    </div>
+            <div class="form-group">
+                <label for="companyName">Symbol</label>
+                <input class="form-control disabled" type="text" name="symbol" value="{{ stock_data.symbol }}" readonly>
+            </div>
+  
+            <div class="form-group">
+              <label for="companyName">Current price</label>
+              <input class="form-control disabled" type="text" name="lastPrice" value="{{stock_data.lastPrice}}" readonly>
+            </div>
+  
+            <div class="form-group">
+              <label for="qty">Quantity</label>
+              <input class="form-control" type="number" name="qty" min="1" required>
+            </div>
+  
+            <div class="form-group">
+                <label for="total">Total</label>
+                <input class="form-control disabled" type="text" name="total" readonly>
+            </div>
+  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <!-- <a href="{% url 'buy' }" class="btn btn-success shining">Confirm</a> -->
+          <!-- {% if form.field.value.total > 100 %} -->
+          <!-- <button type="submit" class="btn btn-primary" disabled>Confirm</button> -->
+          <!-- {% else %} -->
+          <button type="submit" class="btn btn-primary">Confirm</button>
+          <!-- {% endif %} -->
+
+        </div>
+    </form>
       </div>
     </div>
   </div>
+    </div>
 </div>
 
 <div class="row border text-center" id="nse-live-row">
-  <div class="col-md-6 col-lg-4">
-    <div class="row">
-      <div class="col-md-4">
-        <p class="display-5 font-weight-bold">
-          NSE <span class="text-warning">LIVE</span>
-        </p>
-        <p id="current-time"></p>
-      </div>
-      <div
-        class="col-md-8 display-3 text-white text-center"
-        style="background: black;"
-      >
-        <span class="font-weight-bold" id="current-price">{{
-          stock_data.lastPrice
-        }}</span>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6 col-lg-8">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="display-5">
-          <i class="fas fa-sort-up"></i
-          ><span class="font-weight-bold" id="stock-data-change">{{
-            stock_data.change
-          }}</span
-          ><span class="font-weight-bold" id="stock-data-p-change">
-            ( {{ stock_data.pChange }} % )
-          </span>
+    <div class="col-md-6 col-lg-4">
+        <div class="row" >
+            <div class="col-md-4">
+                <p class="display-5 font-weight-bold">NSE <span class="text-warning">LIVE</span></p>
+                <p id="current-time"></p>
+            </div>
+            <div class="col-md-8 display-3 text-white text-center" style="background: black;">
+                <span class="font-weight-bold" id="current-price" >{{ stock_data.lastPrice }}</span>
+            </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="display-5">
-          <i class="fas fa-sort-amount-up-alt"></i>
-          Volume :
-          <span class="font-weight-bold" id="volume">{{
-            stock_data.totalTradedVolume
-          }}</span>
-        </div>
-      </div>
     </div>
-  </div>
+    <div class="col-md-6 col-lg-8">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="display-5">
+                        <i class="fas fa-sort-up"></i><span class="font-weight-bold" id="stock-data-change">{{ stock_data.change }}</span><span class="font-weight-bold" id="stock-data-p-change"> ( {{ stock_data.pChange }} % ) </span>
+                </div>
+            </div>
+             <div class="col-md-6">
+                <div class="display-5">
+                    <i class="fas fa-sort-amount-up-alt"></i>
+                    Volume : <span class="font-weight-bold" id="volume">{{ stock_data.totalTradedVolume }}</span> 
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="row center-on-smallscreen">
-  <div class="col-md-3 border">
-    Prev. close :
-    <span class="font-weight-bold">{{ stock_data.previousClose }}</span>
-  </div>
-  <div class="col-md-3 border">
-    Open Price : <span class="font-weight-bold">{{ stock_data.open }}</span>
-  </div>
-  <div class="col-md-3 border">
-    Bid Price :
-    <span class="font-weight-bold" id="bid-price">{{
-      stock_data.buyPrice1
-    }}</span>
-  </div>
-  <div class="col-md-3 border">
-    offer Price :
-    <span class="font-weight-bold" id="offer-price">{{
-      stock_data.sellPrice1
-    }}</span>
-  </div>
+    <div class="col-md-3 border">
+        Prev. close : <span class="font-weight-bold">{{ stock_data.previousClose }}</span>
+    </div>
+    <div class="col-md-3 border">
+        Open Price : <span class="font-weight-bold">{{ stock_data.open }}</span>
+    </div>
+    <div class="col-md-3 border">
+        Bid Price : <span class="font-weight-bold" id="bid-price">{{ stock_data.buyPrice1 }}</span> 
+    </div>
+    <div  class="col-md-3 border">
+        offer Price : <span class="font-weight-bold" id="offer-price">{{ stock_data.sellPrice1}}</span>
+    </div>
 </div>
 <div class="row center-on-smallscreen">
-  <div class="col-md-3 border">
-    day Low : <span class="font-weight-bold">{{ stock_data.dayLow }} </span>
-  </div>
-  <div class="col-md-3 border">
-    day High : <span class="font-weight-bold">{{ stock_data.dayHigh }}</span>
-  </div>
-  <div class="col-md-3 border">
-    52 week high : <span class="font-weight-bold">{{ stock_data.high52 }}</span>
-  </div>
-  <div class="col-md-3 border">
-    52 week low : <span class="font-weight-bold">{{ stock_data.low52 }}</span>
-  </div>
-</div>
+        <div class="col-md-3 border">
+            day Low : <span class="font-weight-bold">{{ stock_data.dayLow }} </span>
+        </div>
+        <div class="col-md-3 border">
+            day High : <span class="font-weight-bold">{{ stock_data.dayHigh }}</span>
+        </div>
+        <div class="col-md-3 border">
+            52 week high : <span class="font-weight-bold">{{ stock_data.high52 }}</span>
+        </div>
+        <div class="col-md-3 border">
+            52 week low : <span class="font-weight-bold">{{ stock_data.low52 }}</span>
+        </div>
+    </div>
 
-<div class="row my-3 p-5" id="stock-chart-background">
-  <div class="col-md-12 ">
-    <h1 class="text-white text-center border-bottom">Charts</h1>
-  </div>
-  <div class="col-sm-12" id="stock-chart"></div>
-</div>
+    <div class="row my-3 p-5" id="stock-chart-background">
+        <div class="col-md-12 ">
+            <h1 class="text-white text-center border-bottom">Charts</h1>
+        </div>
+        <div class="col-sm-12" id="stock-chart"></div>
+    </div>
 
-<script>
-  $('input[name="qty"]').change(() => {
-    let qtyInput = $('input[name="qty"]').val();
-    let lastPriceInput = $('input[name="lastPrice"').val();
-    let qty = Number(qtyInput);
-    let lastPrice = Number(lastPriceInput);
-    let total = qty * lastPrice;
-    $('input[name="total"]').val(total);
-  });
-</script>
+    <script>
+        $('input[name="qty"]').change(()=>{
+          let qtyInput = $('input[name="qty"]').val()
+          let lastPriceInput = $('input[name="lastPrice"').val()
+          let qty = Number(qtyInput)
+          let lastPrice = Number(lastPriceInput)
+          let total = qty * lastPrice
+          $('input[name="total"]').val(total)
+        })
+      </script>
+  
 
 {% endblock %}
