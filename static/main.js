@@ -2,8 +2,12 @@ window.onload = () => {
     let companyCode = document.querySelector('#company-code').innerText
     let currentTime = new Date(),
         currentTimeDom = document.querySelector("#current-time"),
-        addToCartDom = document.querySelector("#add-to-cart"),
+        addToCartDom = document.querySelector("#add-to-cart");
         removeFromCartDom = document.querySelector('#remove-from-cart');
+    if (removeFromCartDom){
+            removeFromCartDom.addEventListener('click', removeFromCart(companyCode));
+
+    }
     if (currentTimeDom) {
         let month = new Array();
         month[0] = "Jan";
@@ -23,7 +27,6 @@ window.onload = () => {
         console.log("Cannot find it")
     }
     addToCartDom.addEventListener('click', addToCart(companyCode));
-    removeFromCartDom.addEventListener('click', removeFromCart(companyCode));
 
     getChart(companyCode);
     setInterval(get_current_price(companyCode), 3000);

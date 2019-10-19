@@ -1,0 +1,53 @@
+{% extends "dashboard.html" %}
+{% block right_content %}
+
+<div class="row m-0 p-0">
+    <div class="col-sm-12">
+        <h3><u>Profile</u></h3>
+    </div>
+</div>
+<div class="row mb-3">
+    <div class="col-sm-2 text-center">
+        <img class="img-fluid mx-2" src="https://image.flaticon.com/icons/png/512/17/17004.png" alt="" width="100px">
+    </div>
+    <div class="col-sm-10 my-auto">
+        <span id="username">{{user.username}}</span>
+    </div>
+</div>
+
+<div class="row m-0 p-0 border-bottom mb-3">
+        <div class="col-sm-12">
+            <h3 class="display-6"><u>Personal</u></h3>
+        </div>
+        <div class="col-sm-6">
+            <span class="text-align-left">Email</span> 
+            <span class="text-align-right">{{user.email}}</span>
+        </div>
+        <div class="col-sm-6">Phone  8989123456</div>
+        <div class="col-sm-6">PAN  *340G</div>
+        <div class="col-sm-6">DP IDs *2345</div>
+</div>
+
+<div class="row m-0 p-0  mb-3 border-bottom">
+    <div class="col-sm-12">
+        <h3 class="display-6"><u>Account</u></h3>
+    </div>
+    <div class="col-sm-12">
+            Segments BFO, NFO, CDS, MF, MCX, NSE, BSE
+    </div>
+    <div class="col-sm-12">Products CNC, NRML, MIS, BO, CO</div>
+    <div class="col-sm-12">Order types MARKET, LIMIT, SL, SL-M</div>
+</div>
+
+<div class="row m-0 p-0  mb-3">
+        <div class="col-sm-12">
+            <h3 class="display-6"><u>Bank Account(s)</u></h3>
+        </div>
+        <div class="col-sm-6">
+                Account *9456
+        </div>
+        <div class="col-sm-6">
+                Account *5609
+        </div>
+    </div>
+{% endblock %}

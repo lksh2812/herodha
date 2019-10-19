@@ -17,4 +17,5 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('current_holdings/', views.current_holdings, name='current_holdings'),
     path('past_holdings/', views.past_holdings, name='past_holdings'),
+    path('profile/', views.profile, name='profile')
 ]

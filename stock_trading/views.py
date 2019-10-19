@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
-from .models import BuyTransaction, SellTransaction, Bookmark
+from .models import BuyTransaction, SellTransaction, Bookmark, User
 from django.contrib import messages
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
@@ -243,4 +243,8 @@ def past_holdings(request):
     obj = list(SellTransaction.objects.filter(user_id=current_user.id))
     # obj = list(obj)
     return render(request, 'past_holdings.html', {'past_shares':obj})
+
+def profile(request):
+    current_user = request.user
+    return render(request, 'profile.html', {'user' : current_user})
 
