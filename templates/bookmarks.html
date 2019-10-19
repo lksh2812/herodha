@@ -1,0 +1,20 @@
+{% extends 'dashboard.html' %}
+
+{% block left_content %}
+{%for company in bookmarks %}
+<div class="card w-20">
+    <div class="card-header">
+            <a id="bookmark-symbol" href="{% url 'get_quote' company_code='INFY' %}" style="text-decoration: none; color: rgb(13, 15, 15);" class="card-title">{{company.company_code}}</a>
+            <span style="float: right;">price</span>
+    </div>
+    <div class="card-body">
+      
+            <button class="btn btn-primary" id="remove-from-cart">Remove</button>
+    </div>
+  </div>
+
+{%endfor %}
+
+
+
+{% endblock %}

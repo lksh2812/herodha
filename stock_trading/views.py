@@ -238,3 +238,8 @@ def past_holdings(request):
     obj = list(SellTransaction.objects.filter(user_id=current_user.id))
     # obj = list(obj)
     return render(request, 'past_holdings.html', {'past_shares':obj})
+
+def get_bookmarks(request):
+    current_user = request.user
+    bookmarks = list(Bookmark.objects.filter(user_id=current_user.id))
+    return render(request, 'bookmarks.html', {'bookmarks': bookmarks})
