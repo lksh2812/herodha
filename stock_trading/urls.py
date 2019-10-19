@@ -12,6 +12,9 @@ urlpatterns = [
     path('get_current_price/<str:company_code>', views.get_current_price),
     path('accounts/', include('django.contrib.auth.urls')),
     path('sell/<str:company_code>/', views.sell),
+    path('add_to_cart/', views.add_company),
+    path('remove_from_cart/', views.remove_company),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('current_holdings/', views.current_holdings, name='current_holdings'),
+    path('past_holdings/', views.past_holdings, name='past_holdings'),
 ]

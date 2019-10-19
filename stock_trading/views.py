@@ -1,15 +1,13 @@
 from django.shortcuts import render
-from django.http import JsonResponse
 from django.shortcuts import redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
-from .models import BuyTransaction, SellTransaction
+from .models import BuyTransaction, SellTransaction, Bookmark
 from django.contrib import messages
-from django.http import JsonResponse, HttpResponse
-
-
+from datetime import datetime
+from django.views.decorators.csrf import csrf_exempt
 
 import os
 import json
@@ -151,6 +149,7 @@ def buy(request, company_code):
             bt.last_price = last_price
             bt.Total = new_total
             bt.avg_price = new_avg_price
+            bt.date = datetime.now
             bt.save()
             messages.info(request, 'Your transaction was successful.')
             # bt.update(qty=new_quantity, last_price=last_price, Total=new_total)
@@ -202,8 +201,31 @@ def get_current_price(request, company_code):
     return JsonResponse({'stock_data' : stock_data})
 
 
+@csrf_exempt
+def add_company(request):
+    current_user = request.user
+    response = json.load(request)
+    company_code = response
+
+    print(company_code)
+    bookmark = Bookmark(user_id=current_user, company_code=company_code)
+    bookmark.save()
+    return HttpResponse(status=201)
+
+@csrf_exempt
+def remove_company(request):
+    current_user = request.user
+    response = json.load(request)
+    company_code = response
+    bookmark = Bookmark.objects.get(user_id=current_user, company_code=company_code)
+    bookmark.delete()
+    return HttpResponse(status=200)
+  
+
+@login_required(login_url='/accounts/login')
 def dashboard(request):
     return render(request, 'dashboard.html')
+
 
 @login_required(login_url='/accounts/login')
 def current_holdings(request):
@@ -212,3 +234,13 @@ def current_holdings(request):
     obj = BuyTransaction.objects.filter(user_id=current_user.id)
     obj = list(obj)
     return render(request, 'current_holdings.html', {'current_shares':obj})
+
+
+@login_required(login_url='/accounts/login')
+def past_holdings(request):
+    current_user = request.user
+    print(current_user.id)
+    obj = list(SellTransaction.objects.filter(user_id=current_user.id))
+    # obj = list(obj)
+    return render(request, 'past_holdings.html', {'past_shares':obj})
+
