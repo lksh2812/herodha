@@ -24,7 +24,7 @@
         <td>{{share.qty}}</td>
         <td>{{share.avg_price}}</td>
         <td>{{share.Total}}</td>
-        <td>{{share.profit}}</td>
+        <td id="profit">Profit</td>
         <td>{{share.date}}</td>
         <td>
             <form action="/sell/{{share.company_code}}/" method="POST">
@@ -36,4 +36,6 @@
     {% endif %}
     {% endfor %}    
 </table>
+{% load static %}
+<script src="{% static 'current_holdings.js' %}"></script>
 {% endblock %}

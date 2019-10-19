@@ -211,5 +211,4 @@ def current_holdings(request):
     print(current_user.id)
     obj = BuyTransaction.objects.filter(user_id=current_user.id)
     obj = list(obj)
-    # print(obj[0].company_name)
     return render(request, 'current_holdings.html', {'current_shares':obj})
