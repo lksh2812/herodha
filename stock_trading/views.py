@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 
 
+
 import os
 import json
 from elasticsearch import Elasticsearch
@@ -25,6 +26,21 @@ from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
+
+
+#Market Action
+nifty_50 = nse.get_index_quote('nifty 50')
+nifty_bank = nse.get_index_quote('nifty bank')
+nifty_pharma = nse.get_index_quote('nifty pharma')
+nifty_it = nse.get_index_quote('nifty it')
+nifty_auto = nse.get_index_quote('nifty auto')
+
+#Top Gainers
+top_gainers = nse.get_top_gainers()
+
+#Top Losers
+top_losers = nse.get_top_losers()
+
 
 # Create your views here.
 # from .forms import RegistrationForm
@@ -63,21 +79,20 @@ class SignUpView(CreateView):
     template_name = 'registration.html'
 
 
-# @cache_page(CACHE_TTL)
+
 def index(request):
-    #Market Action
-    nifty_50 = nse.get_index_quote('nifty 50')
-    nifty_bank = nse.get_index_quote('nifty bank')
-    nifty_pharma = nse.get_index_quote('nifty pharma')
-    nifty_it = nse.get_index_quote('nifty it')
-    nifty_auto = nse.get_index_quote('nifty auto')
+    # #Market Action
+    # nifty_50 = nse.get_index_quote('nifty 50')
+    # nifty_bank = nse.get_index_quote('nifty bank')
+    # nifty_pharma = nse.get_index_quote('nifty pharma')
+    # nifty_it = nse.get_index_quote('nifty it')
+    # nifty_auto = nse.get_index_quote('nifty auto')
 
-    #Top Gainers
-    top_gainers = nse.get_top_gainers()
+    # #Top Gainers
+    # top_gainers = nse.get_top_gainers()
 
-    #Top Losers
-    top_losers = nse.get_top_losers()
-    print(request.user.username)
+    # #Top Losers
+    # top_losers = nse.get_top_losers()
 
     return render(request, 'index.html', {'nifty_50':nifty_50, \
         'nifty_auto':nifty_auto, 'nifty_bank':nifty_bank, \
