@@ -1,35 +1,100 @@
-.bg {
-  background: url({% static 'tech-charts-thinkstock.jpg.png' %}) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-}
 
+body {
+  background: #ffffff; /* fallback for old browsers */
+  font-family: "Signika", sans-serif;
+}
 
 #bg {
-    position: fixed; 
-    top: -50%; 
-    left: -50%; 
-    width: 200%; 
-    height: 200%;
-  }
-  #bg img {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    bottom: 0; 
-    margin: auto; 
-    min-width: 50%;
-    min-height: 50%;
-  }
-
-body{
-    background: #FFFFFF;  /* fallback for old browsers */    
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+}
+#bg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
 }
 
-/**
- * Icon
- */
+#nse-live-row {
+  background: #f4f7f9;
+}
+#stock-chart-background {
+  background: #1765a5;
+}
 
+#company-name {
+  font-family: "Fjalla One", sans-serif;
+}
+
+#stock-data-change,
+#stock-p-change,
+i {
+  font-size: 3rem;
+}
+hr {
+  background: white;
+  height: 2rem;
+}
+#buy-button {
+  width: 80%;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  outline: 0;
+  -webkit-appearance: none;
+  display: inline-block;
+  position: relative;
+  padding: 20px 38px;
+  top: 0;
+  font-size: 30px;
+  /* font-family: "Open Sans", Helvetica; */
+  border-radius: 4px;
+  border-bottom: 1px solid rgba(239, 243, 23, 0.5);
+  background: rgba(239, 243, 23, 0.876);
+  /* color: #fff; */
+  color: black;
+  box-shadow: 0px 0px 0px rgba(239, 243, 23, 0.1);
+
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+#buy-button:hover {
+  top: -10px;
+  box-shadow: 0px 10px 10px rgba(15, 165, 60, 0.2);
+
+  -webkit-transform: rotateX(20deg);
+  -moz-transform: rotateX(20deg);
+  -ms-transform: rotateX(20deg);
+  transform: rotateX(20deg);
+}
+
+#buy-button:active {
+  top: 0px;
+  box-shadow: 0px 0px 0px rgba(15, 165, 60, 0);
+  background: rgba(20, 224, 133, 1);
+}
+
+@media only screen and (max-width: 770px) {
+  #buy-button {
+    width: 100%;
+  }
+  .center-on-smallscreen {
+    text-align: center;
+  }
+}

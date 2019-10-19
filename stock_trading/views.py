@@ -7,6 +7,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 from .models import BuyTransaction
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 import os
@@ -123,3 +124,7 @@ def buy(request, company_code):
     # print(company_code)
     # print(total)
     return redirect('/get_quote/{}'.format(company_code))
+
+def get_current_price(request, company_code):
+    stock_data = nse.get_quote(company_code)
+    return JsonResponse({'stock_data' : stock_data})
