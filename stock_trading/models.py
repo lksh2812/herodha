@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from datetime import datetime
 
 class User(AbstractUser):
     
@@ -19,6 +20,7 @@ class BuyTransaction(models.Model):
     last_price = models.FloatField()
     Total = models.FloatField()
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=datetime.now, blank=True)
     avg_price = models.FloatField(default=0)
 
     def __str__(self):
@@ -33,8 +35,18 @@ class SellTransaction(models.Model):
     selling_price = models.FloatField()
     profit = models.FloatField()
     total_selling = models.FloatField()
+    date = models.DateTimeField(default=datetime.now, blank=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     
 
     def __str__(self):
         return '<User:{} Transactions {}>'.format(self.user_id__username, self.company_name)
+
+class Bookmark(models.Model):
+    
+    company_code = models.CharField(max_length=50)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+
+    def __str__(self):
+        return '<User:{} Transactions {}>'.format(self.user_id__username, self.company_code)
