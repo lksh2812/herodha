@@ -1,17 +1,18 @@
 {% extends "dashboard.html" %}
 {% block right_content %}
 
-<div class="row">
+<div class="row m-0 p-0">
     <div class="col-sm-12 shadow mb-3">
         <h1><u>Current Holding</u> (<u>s</u>)</h1>
     </div>
 </div>
 
-<table class="table table-striped">
+<table class="table table-striped m-0 p-0">
     <tr class="table-primary">
         <th>Company Name</th>
         <th>Quantity</th>
         <th>Buying Price (Avg)</th>
+        <th>Current Price</th>
         <th>Total Price</th>
         <th>Profit</th>
         <th>Date</th>
@@ -20,10 +21,15 @@
     {% for share in current_shares%}
     {% if share.qty > 0 %}
     <tr>
-        <td>{{share.company_name}}</td>
-        <td>{{share.qty}}</td>
+        <td>
+            {{share.company_name}} 
+            <br>
+            (<span id="company-code" class="font-weight-light">{{share.company_code}}</span>)
+        </td>
+        <td id="qty">{{share.qty}}</td>
         <td>{{share.avg_price}}</td>
-        <td>{{share.Total}}</td>
+        <td id="current-price">Current Price</td>
+        <td id="total">{{share.Total}}</td>
         <td id="profit">Profit</td>
         <td>{{share.date}}</td>
         <td>
