@@ -19,6 +19,22 @@ class BuyTransaction(models.Model):
     last_price = models.FloatField()
     Total = models.FloatField()
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    avg_price = models.FloatField(default=0)
+
+    def __str__(self):
+        return '<User:{} Transactions {}>'.format(self.user_id__username, self.company_name)
+
+class SellTransaction(models.Model):
+    
+    company_name = models.CharField(max_length=100)
+    company_code = models.CharField(max_length=50)
+    qty = models.IntegerField()
+    buying_price = models.FloatField()
+    selling_price = models.FloatField()
+    profit = models.FloatField()
+    total_selling = models.FloatField()
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    
 
     def __str__(self):
         return '<User:{} Transactions {}>'.format(self.user_id__username, self.company_name)
