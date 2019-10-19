@@ -202,5 +202,15 @@ def get_current_price(request, company_code):
     return JsonResponse({'stock_data' : stock_data})
 
 
+@login_required(login_url='/accounts/login')
 def dashboard(request):
     return render(request, 'dashboard.html')
+
+
+@login_required(login_url='/accounts/login')
+def past_holdings(request):
+    current_user = request.user
+    print(current_user.id)
+    obj = list(SellTransaction.objects.filter(user_id=current_user.id))
+    # obj = list(obj)
+    return render(request, 'past_holdings.html', {'past_shares':obj})
