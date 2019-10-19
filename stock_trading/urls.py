@@ -13,4 +13,5 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('sell/<str:company_code>/', views.sell),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('current_holdings/', views.current_holdings, name='current_holdings'),
 ]

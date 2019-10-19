@@ -1,0 +1,25 @@
+{% extends "dashboard.html" %}
+{% block right_content %}
+<table class="table table-striped">
+    <tr class="table-primary">
+        <th>Company Name</th>
+        <th>Quantity</th>
+        <th>Buying Price (Avg)</th>
+        <th>Total Price</th>
+        <th>Profit</th>
+        <th>Date</th>
+    </tr>
+    {% for share in current_shares%}
+    {% if share.qty > 0 %}
+    <tr>
+        <td>{{share.company_name}}</td>
+        <td>{{share.qty}}</td>
+        <td>{{share.avg_price}}</td>
+        <td>{{share.Total}}</td>
+        <td>{{share.profit}}</td>
+        <td>{{share.date}}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+</table>
+{% endblock %}

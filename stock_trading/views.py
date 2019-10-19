@@ -7,7 +7,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 from .models import BuyTransaction, SellTransaction
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 
 
 
@@ -204,3 +204,12 @@ def get_current_price(request, company_code):
 
 def dashboard(request):
     return render(request, 'dashboard.html')
+
+@login_required(login_url='/accounts/login')
+def current_holdings(request):
+    current_user = request.user
+    print(current_user.id)
+    obj = BuyTransaction.objects.filter(user_id=1)
+    obj = list(obj)
+    print(obj[0].company_name)
+    return render(request, 'current_holdings.html', {'past_shares':obj})
