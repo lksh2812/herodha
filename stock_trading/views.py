@@ -7,6 +7,8 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 from .models import BuyTransaction, SellTransaction
 from django.contrib import messages
+from django.http import JsonResponse
+
 
 
 import os
@@ -25,10 +27,24 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
+
+#Market Action
+nifty_50 = nse.get_index_quote('nifty 50')
+nifty_bank = nse.get_index_quote('nifty bank')
+nifty_pharma = nse.get_index_quote('nifty pharma')
+nifty_it = nse.get_index_quote('nifty it')
+nifty_auto = nse.get_index_quote('nifty auto')
+
+#Top Gainers
+top_gainers = nse.get_top_gainers()
+
+#Top Losers
+top_losers = nse.get_top_losers()
+
+
 # Create your views here.
 # from .forms import RegistrationForm
 # from django.contrib.auth.models import User
-
 
 
 # def registration(request):
@@ -63,21 +79,20 @@ class SignUpView(CreateView):
     template_name = 'registration.html'
 
 
-# @cache_page(CACHE_TTL)
+
 def index(request):
-    #Market Action
-    nifty_50 = nse.get_index_quote('nifty 50')
-    nifty_bank = nse.get_index_quote('nifty bank')
-    nifty_pharma = nse.get_index_quote('nifty pharma')
-    nifty_it = nse.get_index_quote('nifty it')
-    nifty_auto = nse.get_index_quote('nifty auto')
+    # #Market Action
+    # nifty_50 = nse.get_index_quote('nifty 50')
+    # nifty_bank = nse.get_index_quote('nifty bank')
+    # nifty_pharma = nse.get_index_quote('nifty pharma')
+    # nifty_it = nse.get_index_quote('nifty it')
+    # nifty_auto = nse.get_index_quote('nifty auto')
 
-    #Top Gainers
-    top_gainers = nse.get_top_gainers()
+    # #Top Gainers
+    # top_gainers = nse.get_top_gainers()
 
-    #Top Losers
-    top_losers = nse.get_top_losers()
-    print(request.user.username)
+    # #Top Losers
+    # top_losers = nse.get_top_losers()
 
     return render(request, 'index.html', {'nifty_50':nifty_50, \
         'nifty_auto':nifty_auto, 'nifty_bank':nifty_bank, \
@@ -146,6 +161,7 @@ def buy(request, company_code):
     # print(total)
     return redirect('/get_quote/{}'.format(company_code))
 
+
 @login_required(login_url='/accounts/login')
 def sell(request, company_code):
     current_user = request.user
@@ -181,7 +197,7 @@ def sell(request, company_code):
     return redirect('/get_quote/{}'.format(company_code))
 
 
+def get_current_price(request, company_code):
+    stock_data = nse.get_quote(company_code)
+    return JsonResponse({'stock_data' : stock_data})
 
-    
-
-    
