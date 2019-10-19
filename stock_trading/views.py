@@ -209,7 +209,7 @@ def dashboard(request):
 def current_holdings(request):
     current_user = request.user
     print(current_user.id)
-    obj = BuyTransaction.objects.filter(user_id=1)
+    obj = BuyTransaction.objects.filter(user_id=current_user.id)
     obj = list(obj)
-    print(obj[0].company_name)
-    return render(request, 'current_holdings.html', {'past_shares':obj})
+    # print(obj[0].company_name)
+    return render(request, 'current_holdings.html', {'current_shares':obj})

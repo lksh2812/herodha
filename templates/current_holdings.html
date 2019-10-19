@@ -1,5 +1,12 @@
 {% extends "dashboard.html" %}
 {% block right_content %}
+
+<div class="row">
+    <div class="col-sm-12 shadow mb-3">
+        <h1><u>Current Holding</u> (<u>s</u>)</h1>
+    </div>
+</div>
+
 <table class="table table-striped">
     <tr class="table-primary">
         <th>Company Name</th>
@@ -8,6 +15,7 @@
         <th>Total Price</th>
         <th>Profit</th>
         <th>Date</th>
+        <th>Sell</th>
     </tr>
     {% for share in current_shares%}
     {% if share.qty > 0 %}
@@ -18,8 +26,14 @@
         <td>{{share.Total}}</td>
         <td>{{share.profit}}</td>
         <td>{{share.date}}</td>
+        <td>
+            <form action="/sell/{{share.company_code}}/" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Sell</button>
+            </form>
+        </td>
     </tr>
     {% endif %}
-    {% endfor %}
+    {% endfor %}    
 </table>
 {% endblock %}
