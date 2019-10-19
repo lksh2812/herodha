@@ -1,5 +1,14 @@
 {% extends 'base_fluid.html' %}
 
     {% block content %}
-
+<div class="row">
+    <div class="col-md-4 border">
+        {% block left_content %}
+        {% endblock %}
+    </div>
+    <div class="col-md-8 border">
+        {% block right_content %}
+        {% endblock %}
+    </div>
+</div>
     {% endblock %}
