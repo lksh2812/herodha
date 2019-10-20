@@ -1,13 +1,10 @@
 window.onload = () => {
-    console.log("Loaded")
     let companyCode = document.querySelector('#company-code').innerText
-    console.log(companyCode)
-    let bookmarkCode = document.querySelector('.bookmark-symbol').innerText
     let currentTime = new Date(),
-        currentTimeDom = document.querySelector("#current-time"),
-        addToCartDom = document.querySelector("#add-to-cart"),
-        removeFromCartDom = document.querySelectorAll('.remove-from-cart');
-        console.log(removeFromCartDom)
+        currentTimeDom = document.querySelector("#current-time");
+    let addToCartDom = document.querySelector('#add-to-cart');
+    addToCartDom.addEventListener('click', addToCart(companyCode));
+    
     if (currentTimeDom) {
         let month = new Array();
         month[0] = "Jan";
@@ -26,11 +23,7 @@ window.onload = () => {
     } else {
         console.log("Cannot find it")
     }
-    addToCartDom.addEventListener('click', addToCart(companyCode));
-    // removeFromCartDom.addEventListener('click', removeFromCart(bookmarkCode));
-    removeFromCartDom.forEach(item => {
-        item.addEventListener('click', removeFromCart(bookmarkCode))
-    });
+
 
     getChart(companyCode);
     setInterval(get_current_price(companyCode), 3000);
@@ -43,6 +36,7 @@ const getChart = (companyCode) => {
             let xChartLabel = document.querySelector('.highcharts-xaxis-labels');
             xChartLabel.style.display = "none"
         })
+        .catch(err=>console.log(err, "chart nahi hai iska bhai"))
 }
 
 const drawChart = (chartData, companyCode) => {
@@ -111,31 +105,11 @@ const get_current_price = (companyCode) => {
 
 const addToCart = (companyCode) =>{
     return ()=>{
-        let host = window.location.hostname
-        console.log(host)
-        fetch(`http://127.0.0.1:8000/add_to_cart/`,{
+        let host = window.location.host;
+        fetch(`http://${host}/add_to_cart/`,{
             method : 'POST',
             body : JSON.stringify(companyCode)
         })
         .then(res=>res.status)
     }
 }
-
-const removeFromCart = (companyCode) =>{
-    return ()=>{
-        let host = window.location.hostname
-        console.log(host)
-        fetch(`http://127.0.0.1:8000/remove_from_cart/`,{
-            method : 'POST',
-            body : JSON.stringify(companyCode)
-        })
-        .then(res=>res.status)
-        .then(() =>{
-            element = document.querySelector('.bookmark');
-            element.parentNode.removeChild(element);
-            console.log(element)
-        })
-        .catch(err => console.log("Abey err dekh " + err))
-    }
-}
-
