@@ -27,10 +27,12 @@
     <div class="col-md-6 m-auto p-auto">
         
         <!-- Button trigger modal -->
+    {% if request.user.is_authenticated %}
     <button id="buy-button" class="btn-block" type="button" data-toggle="modal" data-target="#exampleModalCenter">
         Buy
     </button>
     <button id="add-to-cart" class="btn-block">Add</button>
+    {% endif %}
   
   <!-- Modal -->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
