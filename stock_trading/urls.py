@@ -18,4 +18,5 @@ urlpatterns = [
     path('bookmarks', views.get_bookmarks, name='remove_company'),
     path('current_holdings/', views.current_holdings, name='current_holdings'),
     path('past_holdings/', views.past_holdings, name='past_holdings'),
+    path('profile/', views.profile, name='profile')
 ]

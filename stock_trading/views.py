@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
-from .models import BuyTransaction, SellTransaction, Bookmark
+from .models import BuyTransaction, SellTransaction, Bookmark, User
 from django.contrib import messages
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
@@ -245,8 +245,14 @@ def past_holdings(request):
     return render(request, 'past_holdings.html', {'past_shares':obj})
 
 @login_required(login_url='/accounts/login')
+def profile(request):
+    current_user = request.user
+    return render(request, 'profile.html', {'user' : current_user})
+
+@login_required(login_url='/accounts/login')
 def get_bookmarks(request):
     current_user = request.user
     bookmarks = list(Bookmark.objects.filter(user_id=current_user.id))
     return render(request, 'bookmarks.html', {'bookmarks': bookmarks})
+
 
