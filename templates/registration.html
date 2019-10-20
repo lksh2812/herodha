@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_bg.html' %}
 {% load static %}
 {% block content %}
 <div id="bg">
@@ -12,6 +12,11 @@
         {{ form }}
         <input type="submit" value="Submit" class="btn btn-primary mt-4">
     </form>
+    <div class="row my-2">
+        <div class="col-sm-12">
+            <a href="{% url 'login' %}"> Already an user? Login</a>   
+        </div>
+    </div>
     </div>
   </div>
 
