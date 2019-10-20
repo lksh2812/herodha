@@ -1,9 +1,10 @@
 window.onload = () => {
     let companyCode = document.querySelector('#company-code').innerText
+    // let bookmarkCode = document.querySelector('#bookmark-symbol').innerText
     let currentTime = new Date(),
         currentTimeDom = document.querySelector("#current-time"),
-        addToCartDom = document.querySelector("#add-to-cart"),
-        removeFromCartDom = document.querySelector('#remove-from-cart');
+        addToCartDom = document.querySelector("#add-to-cart");
+        // removeFromCartDom = document.querySelector('#remove-from-cart');
     if (currentTimeDom) {
         let month = new Array();
         month[0] = "Jan";
@@ -26,6 +27,7 @@ window.onload = () => {
     if(removeFromCartDom){
         removeFromCartDom.addEventListener('click', removeFromCart(companyCode));
     }
+
 
     getChart(companyCode);
     setInterval(get_current_price(companyCode), 3000);
