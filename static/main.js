@@ -24,7 +24,10 @@ window.onload = () => {
         console.log("Cannot find it")
     }
     addToCartDom.addEventListener('click', addToCart(companyCode));
-    // removeFromCartDom.addEventListener('click', removeFromCart(bookmarkCode));
+    if(removeFromCartDom){
+        removeFromCartDom.addEventListener('click', removeFromCart(companyCode));
+    }
+
 
     getChart(companyCode);
     setInterval(get_current_price(companyCode), 3000);
@@ -81,12 +84,14 @@ const get_current_price = (companyCode) => {
                 let pastCurrentPrice = Number(currentPrice.innerText)
                 let nowCurrentPrice = Number(stockData['lastPrice'])
                 let color = "#00BB6E";
+                let icon = "<i class='fas fa-sort-up'></i>"
                 if (pastCurrentPrice > nowCurrentPrice) {
                     color = "#F34459";
+                    icon = "<i class='fas fa-sort-down'></i>"
                 }
                 currentPrice.parentElement.style.background = color
                 currentPrice.innerText = stockData['lastPrice']
-                stockDataChange.innerText = stockData['change']
+                stockDataChange.innerHTML = `${icon} ${stockData['change']}`
                 stockDataChange.style.color = color
                 stockDataPchange.innerText = ` ( ${stockData['pChange']} % )`
                 stockDataPchange.style.color = color
