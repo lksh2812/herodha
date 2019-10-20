@@ -1,15 +1,11 @@
 window.onload = () => {
     let companyCode = document.querySelector('#company-code').innerText
-    // let bookmarkCode = document.querySelector('#bookmark-symbol').innerText
+    console.log(companyCode)
+    let bookmarkCode = document.querySelector('.bookmark-symbol').innerText
     let currentTime = new Date(),
         currentTimeDom = document.querySelector("#current-time"),
-        addToCartDom = document.querySelector("#add-to-cart");
-        removeFromCartDom = document.querySelector('#remove-from-cart');
-    if (removeFromCartDom){
-            removeFromCartDom.addEventListener('click', removeFromCart(companyCode));
-
-    }
-
+        addToCartDom = document.querySelector("#add-to-cart"),
+        removeFromCartDom = document.querySelectorAll('.remove-from-cart');
     if (currentTimeDom) {
         let month = new Array();
         month[0] = "Jan";
@@ -29,7 +25,10 @@ window.onload = () => {
         console.log("Cannot find it")
     }
     addToCartDom.addEventListener('click', addToCart(companyCode));
-
+    // removeFromCartDom.addEventListener('click', removeFromCart(bookmarkCode));
+    removeFromCartDom.forEach(item => {
+        item.addEventListener('click', removeFromCart(bookmarkCode))
+    });
 
     getChart(companyCode);
     setInterval(get_current_price(companyCode), 3000);
@@ -129,6 +128,11 @@ const removeFromCart = (companyCode) =>{
             body : JSON.stringify(companyCode)
         })
         .then(res=>res.status)
+        .then(() =>{
+            element = document.querySelector('.bookmark');
+            element.parentNode.removeChild(element);
+        })
+        .catch(err => console.log("Abey err dekh " + err))
     }
 }
 
