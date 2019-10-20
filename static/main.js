@@ -130,6 +130,7 @@ const removeFromCart = (companyCode) =>{
             element = document.querySelector('.bookmark');
             element.parentNode.removeChild(element);
         })
+        .catch(err => console.log("Abey err dekh " + err))
     }
 }
 
