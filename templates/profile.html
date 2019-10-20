@@ -16,16 +16,36 @@
 </div>
 
 <div class="row m-0 p-0 border-bottom mb-3">
-        <div class="col-sm-12">
+        <div class="col-sm-8">
             <h3 class="display-6"><u>Personal</u></h3>
         </div>
-        <div class="col-sm-6">
-            <span class="text-align-left">Email</span> 
-            <span class="text-align-right">{{user.email}}</span>
+        <div class="col-sm-4 text-right">
+            <a class="btn btn-sm btn-outline-primary" href="/edit_profile">Edit Profile</a>
         </div>
-        <div class="col-sm-6">Phone  8989123456</div>
-        <div class="col-sm-6">PAN  *340G</div>
-        <div class="col-sm-6">DP IDs *2345</div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6 text-secondary font-weight-light">Email</div>
+                <div class="col-sm-6">{{user.email}}</div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6 font-weight-light text-secondary">Phone</div>
+                <div class="col-sm-6">8989123456</div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6 font-weight-light text-secondary">PAN</div>
+                <div class="col-sm-6">*340G</div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-6 font-weight-light text-secondary">DP IDs</div>
+                <div class="col-sm-6">*2345</div>
+            </div>             
+        </div>
 </div>
 
 <div class="row m-0 p-0  mb-3 border-bottom">
@@ -33,10 +53,25 @@
         <h3 class="display-6"><u>Account</u></h3>
     </div>
     <div class="col-sm-12">
-            Segments BFO, NFO, CDS, MF, MCX, NSE, BSE
+        <div class="row">
+            <div class="col-sm-3 font-weight-light text-secondary">Segments</div>
+            <div class="col-sm-9">BFO, NFO, CDS, MF, MCX, NSE, BSE</div>
+        </div>             
     </div>
-    <div class="col-sm-12">Products CNC, NRML, MIS, BO, CO</div>
-    <div class="col-sm-12">Order types MARKET, LIMIT, SL, SL-M</div>
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-3 font-weight-light text-secondary">Products</div>
+            <div class="col-sm-9">CNC, NRML, MIS, BO, CO</div>
+        </div>
+         
+    </div>
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-3 font-weight-light text-secondary">Order types</div>
+            <div class="col-sm-9">MARKET, LIMIT, SL, SL-M</div>
+        </div>
+         
+    </div>
 </div>
 
 <div class="row m-0 p-0  mb-3">
@@ -44,10 +79,17 @@
             <h3 class="display-6"><u>Bank Account(s)</u></h3>
         </div>
         <div class="col-sm-6">
-                Account *9456
+            <div class="row">
+                <div class="col-sm-6 font-weight-light text-secondary">Account</div>
+                <div class="col-sm-6">*9456</div>
+            </div>
+                 
         </div>
         <div class="col-sm-6">
-                Account *5609
+            <div class="row">
+                <div class="col-sm-6 font-weight-light text-secondary">Bank</div>
+                <div class="col-sm-6">Nirav Modi Bank</div>
+            </div>
         </div>
     </div>
 {% endblock %}
