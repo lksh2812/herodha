@@ -230,7 +230,6 @@ def dashboard(request):
 @login_required(login_url='/accounts/login')
 def current_holdings(request):
     current_user = request.user
-    print(current_user.id)
     obj = BuyTransaction.objects.filter(user_id=current_user.id)
     obj = list(obj)
     return render(request, 'current_holdings.html', {'current_shares':obj})
