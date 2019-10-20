@@ -1,4 +1,5 @@
 window.onload = () => {
+    console.log("Loaded")
     let companyCode = document.querySelector('#company-code').innerText
     console.log(companyCode)
     let bookmarkCode = document.querySelector('.bookmark-symbol').innerText
@@ -6,6 +7,7 @@ window.onload = () => {
         currentTimeDom = document.querySelector("#current-time"),
         addToCartDom = document.querySelector("#add-to-cart"),
         removeFromCartDom = document.querySelectorAll('.remove-from-cart');
+        console.log(removeFromCartDom)
     if (currentTimeDom) {
         let month = new Array();
         month[0] = "Jan";
@@ -131,6 +133,7 @@ const removeFromCart = (companyCode) =>{
         .then(() =>{
             element = document.querySelector('.bookmark');
             element.parentNode.removeChild(element);
+            console.log(element)
         })
         .catch(err => console.log("Abey err dekh " + err))
     }
