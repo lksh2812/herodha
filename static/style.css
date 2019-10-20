@@ -33,11 +33,10 @@ body {
   font-family: "Fjalla One", sans-serif;
 }
 
-#stock-data-change,
-#stock-p-change,
-i {
+#stock-data-change {
   font-size: 3rem;
 }
+
 hr {
   background: white;
   height: 2rem;
@@ -102,4 +101,10 @@ hr {
   .center-on-smallscreen {
     text-align: center;
   }
+}
+
+#username{
+  font-size: 3rem;
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+  font-weight: 100;
 }

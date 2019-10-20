@@ -1,17 +1,13 @@
 from django.shortcuts import render
-from django.http import JsonResponse
 from django.shortcuts import redirect
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
-from .models import BuyTransaction, SellTransaction, Bookmark
+from .models import BuyTransaction, SellTransaction, Bookmark, User
 from django.contrib import messages
-from django.http import JsonResponse
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
-
-
 
 import os
 import json
@@ -232,6 +228,15 @@ def dashboard(request):
 
 
 @login_required(login_url='/accounts/login')
+def current_holdings(request):
+    current_user = request.user
+    print(current_user.id)
+    obj = BuyTransaction.objects.filter(user_id=current_user.id)
+    obj = list(obj)
+    return render(request, 'current_holdings.html', {'current_shares':obj})
+
+
+@login_required(login_url='/accounts/login')
 def past_holdings(request):
     current_user = request.user
     print(current_user.id)
@@ -239,7 +244,15 @@ def past_holdings(request):
     # obj = list(obj)
     return render(request, 'past_holdings.html', {'past_shares':obj})
 
+@login_required(login_url='/accounts/login')
+def profile(request):
+    current_user = request.user
+    return render(request, 'profile.html', {'user' : current_user})
+
+@login_required(login_url='/accounts/login')
 def get_bookmarks(request):
     current_user = request.user
     bookmarks = list(Bookmark.objects.filter(user_id=current_user.id))
     return render(request, 'bookmarks.html', {'bookmarks': bookmarks})
+
+
