@@ -244,7 +244,15 @@ def past_holdings(request):
     # obj = list(obj)
     return render(request, 'past_holdings.html', {'past_shares':obj})
 
+@login_required(login_url='/accounts/login')
 def profile(request):
     current_user = request.user
     return render(request, 'profile.html', {'user' : current_user})
+
+@login_required(login_url='/accounts/login')
+def get_bookmarks(request):
+    current_user = request.user
+    bookmarks = list(Bookmark.objects.filter(user_id=current_user.id))
+    return render(request, 'bookmarks.html', {'bookmarks': bookmarks})
+
 
