@@ -143,8 +143,8 @@ hr {
 }
 
 @media only screen and (max-width: 770px) {
-  #buy-button {
-    width: 50%;
+  #buy-button, #add-to-cart {
+    width: 100%;
   }
   .center-on-smallscreen {
     text-align: center;
