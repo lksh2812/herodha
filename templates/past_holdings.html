@@ -3,7 +3,7 @@
 {% block right_content %}
 <h3 class="display-4">Past Holdings</h3>
 <table class="table table-striped">
-    <tr class="table-primary">
+    <tr class="table-primary past-holding-row">
         <th>Company Name</th>
         <th>Quantity</th>
         <th>Buying Price</th>
@@ -14,12 +14,12 @@
 
     {% for share in past_shares%}
     <tr>
-        <td>{{share.company_name}}</td>
-        <td>{{share.qty}}</td>
-        <td>{{share.buying_price}}</td>
-        <td>{{share.selling_price}}</td>
-        <td>{{share.profit}}</td>
-        <td>{{share.date}}</td>
+        <td class="past-holding-data">{{share.company_name}}</td>
+        <td class="past-holding-data">{{share.qty}}</td>
+        <td class="past-holding-data">{{share.buying_price}}</td>
+        <td class="past-holding-data">{{share.selling_price}}</td>
+        <td class="past-holding-data">{{share.profit}}</td>
+        <td class="past-holding-data">{{share.date}}</td>
     </tr>
     {% endfor %}
 </table>

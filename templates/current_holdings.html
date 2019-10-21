@@ -8,7 +8,7 @@
 </div>
 
 <table class="table table-striped m-0 p-0">
-    <tr class="table-primary">
+    <tr class="table-primary current-holding-row">
         <th>Company Name</th>
         <th>Quantity</th>
         <th>Buying Price (Avg)</th>
@@ -21,18 +21,18 @@
     {% for share in current_shares%}
     {% if share.qty > 0 %}
     <tr>
-       <td>
+       <td class="current-holding-data">
         <a href="/get_quote/{{share.company_code}}" style="text-decoration: none;">{{share.company_name}} 
           <br>
           (<span id="company-code" class="font-weight-light">{{share.company_code}}</span>)</a>
     </td>
-        <td id="qty">{{share.qty}}</td>
-        <td>{{share.avg_price}}</td>
-        <td id="current-price">Current Price</td>
-        <td id="total">{{share.Total}}</td>
-        <td id="profit">Profit</td>
-        <td>{{share.date}}</td>
-        <td>
+        <td class="current-holding-data" id="qty">{{share.qty}}</td>
+        <td class="current-holding-data">{{share.avg_price}}</td>
+        <td class="current-holding-data" id="current-price">Current Price</td>
+        <td class="current-holding-data" id="total">{{share.Total}}</td>
+        <td class="current-holding-data" id="profit">Profit</td>
+        <td class="current-holding-data">{{share.date}}</td>
+        <td class="current-holding-data">
         
                 <!-- Button trigger modal -->
             <button id="sell-button" class="btn btn-block btn-primary btn-danger" type="button" data-toggle="modal" data-target="#exampleModalCenter-{{share.id}}">
