@@ -9,6 +9,7 @@ from django.contrib import messages
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 
+
 import os
 import json
 from elasticsearch import Elasticsearch
@@ -252,7 +253,8 @@ def profile(request):
 @login_required(login_url='/accounts/login')
 def get_bookmarks(request):
     current_user = request.user
-    bookmarks = list(Bookmark.objects.filter(user_id=current_user.id))
-    return render(request, 'bookmarks.html', {'bookmarks': bookmarks})
+    bookmarks = Bookmark.objects.filter(user_id=current_user.id).values()
+    # return render(request, 'bookmarks.html', {'bookmarks': bookmarks})
+    return JsonResponse({'bookmarks': list(bookmarks)}, safe=False)
 
 
