@@ -128,4 +128,5 @@ dmypy.json
 # My files
 demo.py
 db.sqlite3
+search_aws.py
 

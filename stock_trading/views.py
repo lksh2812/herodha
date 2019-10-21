@@ -103,6 +103,7 @@ def search_stocks(request):
         stock = request.POST['stock']
         result = es.search(index='stocks', body={'query': {'multi_match': \
             {'query': stock, 'fields': ['*']}}})
+        print(result)
         result = result['hits']['hits'][0]['_source']['symbol']
         return redirect("/get_quote/{}".format(result))
     except:
