@@ -5,8 +5,8 @@
         <div>
 
             <h3>Market Action</h3>
-            <table class="table table-striped">
-                <tr class="table-primary">
+            <table class="table table-striped market-action">
+                <tr class="table-primary market-action-row">
                     <th>Index</th>
                     <th>Price</th>
                     <th>Price Change</th>
@@ -46,7 +46,7 @@
     
             <h3>Top Gainers </h3>
             <table class="table table-striped">
-                <tr class="table-success">
+                <tr class="table-success top-gainers-row">
                     <th>firm</th>
                     <th>OpenPrice</th>
                     <th>LTP</th>
@@ -54,10 +54,10 @@
                 </tr>
                 {% for gainer in top_gainers %}
                     <tr class="">
-                        <td>{{gainer.symbol}}</td>
-                        <td>{{gainer.openPrice}}</td>
-                        <td>{{gainer.ltp}}</td>
-                        <td>{{gainer.highPrice}}</td>
+                        <td class="top">{{gainer.symbol}}</td>
+                        <td class="top">{{gainer.openPrice}}</td>
+                        <td class="top">{{gainer.ltp}}</td>
+                        <td class="top">{{gainer.highPrice}}</td>
                     </tr>
                 {% endfor %}
             </table>
@@ -65,8 +65,8 @@
             
             
             <h3>Top Losers</h3>
-            <table class="table table-striped">
-                <tr class="table-danger">
+            <table class="table table-striped top-losers">
+                <tr class="table-danger top-losers-row">
                     <th>firm</th>
                     <th>OpenPrice</th>
                     <th>LTP</th>
@@ -74,10 +74,10 @@
                 </tr>
                 {% for loser in top_losers %}
                     <tr>
-                        <td>{{loser.symbol}}</td>
-                        <td>{{loser.openPrice}}</td>
-                        <td>{{loser.ltp}}</td>
-                        <td>{{loser.highPrice}}</td>
+                        <td class="top">{{loser.symbol}}</td>
+                        <td class="top">{{loser.openPrice}}</td>
+                        <td class="top">{{loser.ltp}}</td>
+                        <td class="top">{{loser.highPrice}}</td>
                     </tr>
                 {% endfor %}
             </table>

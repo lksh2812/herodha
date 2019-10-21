@@ -156,3 +156,72 @@ hr {
   /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
   font-weight: 100;
 }
+
+@media 
+only screen and (max-width: 480px) {
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+ .market-action-row, .top-gainers-row, .top-losers-row, .current-holding-row, .past-holding-row { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr { border: 1px solid #ccc; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+    padding-left: 60% !important; 
+    /* padding: 0rem !important; */
+  }
+
+	
+	td:before { 
+		/* Now like a table header */
+    position: absolute;
+    padding: 0;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+    width: 45%; 
+		/* padding-right: 10px;  */
+    white-space: nowrap;
+	}
+	
+	/*
+	Label the data
+	*/
+	td:nth-of-type(1):before { content: "Index"; }
+	td:nth-of-type(2):before { content: "Price"; }
+	td:nth-of-type(3):before { content: "Price Change"; }
+  td:nth-of-type(4):before { content: "percentageChange"; }
+
+  .top:nth-of-type(1):before { content: "firm"; }
+  .top:nth-of-type(2):before { content: "OpenPrice"; }
+  .top:nth-of-type(3):before { content: "LTP"; }
+  .top:nth-of-type(4):before { content: "HighPrice"; }
+
+  .current-holding-data:nth-of-type(1):before { content: "Company Name";}
+  .current-holding-data:nth-of-type(2):before { content: "Quantity";}
+  .current-holding-data:nth-of-type(3):before { content: "Buying Price";}
+  .current-holding-data:nth-of-type(4):before { content: "Current Price";}
+  .current-holding-data:nth-of-type(5):before { content: "Total Price";}
+  .current-holding-data:nth-of-type(6):before { content: "Profit";}
+  .current-holding-data:nth-of-type(7):before { content: "Date";}
+  .current-holding-data:nth-of-type(8):before { content: "Sell";}
+
+  .past-holding-data:nth-of-type(1):before { content: "Company Name";}
+  .past-holding-data:nth-of-type(2):before { content: "Quantity";}
+  .past-holding-data:nth-of-type(3):before { content: "Buying Price";}
+  .past-holding-data:nth-of-type(4):before { content: "Selling Price";}
+  .past-holding-data:nth-of-type(5):before { content: "Profit";}
+  .past-holding-data:nth-of-type(6):before { content: "Date";}
+}
