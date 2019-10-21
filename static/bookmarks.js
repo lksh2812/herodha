@@ -1,4 +1,5 @@
 window.onload = () =>{
+    console.log("bookmark.js")
     let removeFromCartDom = document.querySelectorAll('.remove-from-cart');
     let bookmarkCodeDom = document.querySelectorAll('.bookmark-symbol');
 
