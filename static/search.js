@@ -6586,6 +6586,8 @@ let options = {
     ]
   };
 
+console.log("Search js")
+
 let fuse = new Fuse(allStocks, options)
 let result = fuse.search('reliance');
 
@@ -6602,8 +6604,11 @@ const showSearchResult = (searchResult) =>{
     let ulDom = document.querySelector("#search-result");
     let liContent = "";
     for(let i = 0; i < searchResult.length; i++){
-        // console.log(searchResult['SYMBOL'])
-        liContent += `<li>${searchResult[i]['SYMBOL']} ${searchResult[i]['NAME OF COMPANY']}</li>`;
+        liContent += `<li class="list-group-item">
+        <a href="/get_quote/${searchResult[i]['SYMBOL']}">
+        ${searchResult[i]['SYMBOL']} ${searchResult[i]['NAME OF COMPANY']}
+        </a>
+        </li>`
     }
     ulDom.innerHTML = liContent;
 }

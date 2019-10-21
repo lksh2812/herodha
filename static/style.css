@@ -142,6 +142,19 @@ hr {
   padding-left: 0;
 }
 
+#search-result{
+  opacity: 0.9;
+  position: absolute;
+  right: 8rem;
+  z-index: 1;
+}
+
+@media only screen and (max-width : 992px){
+  #search-result{
+    left: 0;
+    right: 0;
+  }
+}
 
 @media only screen and (max-width: 770px) {
   #buy-button, #add-to-cart {
@@ -149,6 +162,9 @@ hr {
   }
   .center-on-smallscreen {
     text-align: center;
+  }
+  #search-result{
+    right: 0;
   }
 }
 
@@ -161,7 +177,7 @@ hr {
 @media 
 only screen and (max-width: 480px) {
 
-	/* Force table to not be like tables anymore */
+  /* Force table to not be like tables anymore */
 	table, thead, tbody, th, td, tr { 
 		display: block; 
 	}
@@ -225,4 +241,5 @@ only screen and (max-width: 480px) {
   .past-holding-data:nth-of-type(4):before { content: "Selling Price";}
   .past-holding-data:nth-of-type(5):before { content: "Profit";}
   .past-holding-data:nth-of-type(6):before { content: "Date";}
+
 }

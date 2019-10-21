@@ -4,7 +4,9 @@ window.onload = () => {
     let currentTime = new Date(),
         currentTimeDom = document.querySelector("#current-time");
     let addToCartDom = document.querySelector('#add-to-cart');
-    addToCartDom.addEventListener('click', addToCart(companyCode));
+    if(addToCartDom){
+        addToCartDom.addEventListener('click', addToCart(companyCode));
+    }
     
     if (currentTimeDom) {
         let month = new Array();

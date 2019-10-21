@@ -39,14 +39,9 @@
       
       <form class="form-inline my-2 my-lg-0" action="/search_stocks" method="post">
         {% csrf_token %}
-        <div class="autocomplete">
             <input id="search-box" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="stock" autocomplete="off" onkeyup="search()">
-        </div>
         <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
       </form>
-      <!-- Example single danger button -->
     </div>
   </nav>
-<ul id="search-result" style="background: green;">
-
-</ul>
+  <ul class="list-group" id="search-result"></ul>
