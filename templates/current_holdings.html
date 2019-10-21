@@ -21,11 +21,11 @@
     {% for share in current_shares%}
     {% if share.qty > 0 %}
     <tr>
-        <td>
-            {{share.company_name}} 
-            <br>
-            (<span id="company-code" class="font-weight-light">{{share.company_code}}</span>)
-        </td>
+       <td>
+        <a href="/get_quote/{{share.company_code}}" style="text-decoration: none;">{{share.company_name}} 
+          <br>
+          (<span id="company-code" class="font-weight-light">{{share.company_code}}</span>)</a>
+    </td>
         <td id="qty">{{share.qty}}</td>
         <td>{{share.avg_price}}</td>
         <td id="current-price">Current Price</td>
