@@ -137,7 +137,7 @@ def buy(request, company_code):
         available_funds -= total
         if bt is None:
             
-            transaction = BuyTransaction(user_id=current_user, company_name=company_name, company_code=company_code, qty=quantity, last_price=last_price, Total=total, avg_price=last_price)
+            transaction = BuyTransaction(user_id=current_user, company_name=company_name, company_code=company_code, qty=quantity, last_price=last_price, Total=total, avg_price=last_price, date=datetime.now)
             transaction.save()
             messages.info(request, 'Your transaction was successful.')
         else:

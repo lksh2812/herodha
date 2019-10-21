@@ -20,7 +20,7 @@ class BuyTransaction(models.Model):
     last_price = models.FloatField()
     Total = models.FloatField()
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateTimeField(default=datetime.now, blank=True)
+    date = models.DateTimeField(auto_now=True)
     avg_price = models.FloatField(default=0)
 
     def __str__(self):
