@@ -253,11 +253,12 @@ def profile(request):
     bookmarks = Bookmark.objects.filter(user_id=current_user.id).values()
     return render(request, 'profile.html', {'user' : current_user , 'bookmarks': bookmarks})
 
+#not needed
 @login_required(login_url='/accounts/login')
 def get_bookmarks(request):
     current_user = request.user
     bookmarks = Bookmark.objects.filter(user_id=current_user.id).values()
-    # return render(request, 'bookmarks.html', {'bookmarks': bookmarks})
-    return JsonResponse({'bookmarks': list(bookmarks)}, safe=False)
+    return render(request, 'bookmarks.html', {'bookmarks': bookmarks})
+    # return JsonResponse({'bookmarks': list(bookmarks)}, safe=False)
 
 
