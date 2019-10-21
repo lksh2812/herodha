@@ -23,8 +23,8 @@ class BuyTransaction(models.Model):
     date = models.DateTimeField(auto_now=True)
     avg_price = models.FloatField(default=0)
 
-    def __str__(self):
-        return '<User:{} Transactions {}>'.format(self.user_id__username, self.company_name)
+    # def __str__(self):
+    #     return '<User:{} Transactions {}>'.format(self.user_id__username, self.company_name)
 
 class SellTransaction(models.Model):
     
@@ -39,8 +39,8 @@ class SellTransaction(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     
 
-    def __str__(self):
-        return '<User:{} Transactions {}>'.format(self.user_id__username, self.company_name)
+    # def __str__(self):
+    #     return '<User:{} Transactions {}>'.format(self.user_id__username, self.company_name)
 
 class Bookmark(models.Model):
     
@@ -48,5 +48,5 @@ class Bookmark(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     
 
-    def __str__(self):
-        return '<User:{} Transactions {}>'.format(self.user_id__username, self.company_code)
+    # def __str__(self):
+    #     return '<User:{} Transactions {}>'.format(self.user_id__username, self.company_code)

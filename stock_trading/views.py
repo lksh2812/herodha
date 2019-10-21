@@ -21,6 +21,8 @@ nse = Nse()
 
 from .forms import CustomUserCreationForm
 
+from .checksum import *
+
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
@@ -160,7 +162,21 @@ def buy(request, company_code):
     # print(company_name)
     # print(company_code)
     # print(total)
-    return redirect('/get_quote/{}'.format(company_code))
+    MERCHANT_KEY = os.getenv('MERCHANT_KEY')
+    param_dict = {
+                'MID': os.getenv('MID'),
+                'ORDER_ID': '2',
+                'TXN_AMOUNT': str(total),
+                'CUST_ID': str(current_user.id),
+                'INDUSTRY_TYPE_ID': 'Retail',
+                'WEBSITE': 'WEBSTAGING',
+                'CHANNEL_ID': 'WEB',
+                'CALLBACK_URL':'http://127.0.0.1:8000/payments/',
+            }
+    param_dict['CHECKSUMHASH'] = generate_checksum(param_dict, MERCHANT_KEY)
+    print(param_dict)
+    return render(request, 'paytm.html', {'param_dict':param_dict})
+    # return redirect('/get_quote/{}'.format(company_code))
 
 
 @login_required(login_url='/accounts/login')
@@ -262,3 +278,22 @@ def get_bookmarks(request):
     # return JsonResponse({'bookmarks': list(bookmarks)}, safe=False)
 
 
+@csrf_exempt
+def payments(request):
+    # paytm will send post request here
+
+    return HttpResponse('Transaction successful!!')
+    # form = request.POST
+    # response_dict = {}
+    # for i in form.keys():
+    #     response_dict[i] = form[i]
+    #     if i == 'CHECKSUMHASH':
+    #         checksum = form[i]
+
+    # verify = verify_checksum(response_dict, MERCHANT_KEY, checksum)
+    # if verify:
+    #     if response_dict['RESPCODE'] == '01':
+    #         print('order successful')
+    #     else:
+    #         print('order was not successful because' + response_dict['RESPMSG'])
+    # return render(request, 'paymentstatus.html', {'response': response_dict})
