@@ -113,7 +113,16 @@ def search_stocks(request):
 
 def get_quote(request, company_code):
     stock = nse.get_quote(company_code)
-    return render(request, 'get_quote.html', {'stock_data' : stock})
+    try:
+        bm = Bookmark.objects.get(user_id=request.user.id, company_code=company_code.upper())
+    except Bookmark.DoesNotExist:
+        bm = None
+    
+    if bm is None:
+        status = False
+    else:
+        status = True
+    return render(request, 'get_quote.html', {'stock_data' : stock, 'bookmark_status': status})
 
 @login_required(login_url='/accounts/login/')
 def buy(request, company_code):

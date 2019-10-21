@@ -3,7 +3,13 @@ window.onload = () => {
     let currentTime = new Date(),
         currentTimeDom = document.querySelector("#current-time");
     let addToCartDom = document.querySelector('#add-to-cart');
-    addToCartDom.addEventListener('click', addToCart(companyCode));
+    if(addToCartDom.innerText == 'Add'){
+        addToCartDom.addEventListener('click', addToCart(companyCode));
+    }
+    else if(addToCartDom.innerText == 'Remove'){
+        addToCartDom.addEventListener('click', removeFromCart(companyCode));
+    }
+   
     
     if (currentTimeDom) {
         let month = new Array();
@@ -111,5 +117,17 @@ const addToCart = (companyCode) =>{
             body : JSON.stringify(companyCode)
         })
         .then(res=>res.status)
+    }
+}
+
+const removeFromCart = (companyCode) =>{
+    return ()=>{
+        let host = window.location.host
+        fetch(`http://${host}/remove_from_cart/`,{
+            method : 'POST',
+            body : JSON.stringify(companyCode)
+        })
+        .then(res=>res.status)
+        .catch(err => console.log("Abey err dekh " + err))
     }
 }
