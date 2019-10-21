@@ -9,6 +9,7 @@ from django.contrib import messages
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 
+
 import os
 import json
 from elasticsearch import Elasticsearch
@@ -137,7 +138,7 @@ def buy(request, company_code):
         available_funds -= total
         if bt is None:
             
-            transaction = BuyTransaction(user_id=current_user, company_name=company_name, company_code=company_code, qty=quantity, last_price=last_price, Total=total, avg_price=last_price)
+            transaction = BuyTransaction(user_id=current_user, company_name=company_name, company_code=company_code, qty=quantity, last_price=last_price, Total=total, avg_price=last_price, date=datetime.now)
             transaction.save()
             messages.info(request, 'Your transaction was successful.')
         else:
@@ -252,7 +253,8 @@ def profile(request):
 @login_required(login_url='/accounts/login')
 def get_bookmarks(request):
     current_user = request.user
-    bookmarks = list(Bookmark.objects.filter(user_id=current_user.id))
-    return render(request, 'bookmarks.html', {'bookmarks': bookmarks})
+    bookmarks = Bookmark.objects.filter(user_id=current_user.id).values()
+    # return render(request, 'bookmarks.html', {'bookmarks': bookmarks})
+    return JsonResponse({'bookmarks': list(bookmarks)}, safe=False)
 
 
