@@ -6587,10 +6587,23 @@ let options = {
   };
 
 let fuse = new Fuse(allStocks, options)
+let result = fuse.search('reliance');
 
 let searchBoxDom = document.querySelector("input[name='stock']")
 const search = () =>{
     let searchValue = searchBoxDom.value;
     let result = fuse.search(searchValue);
-    console.log(result.slice(0,10))
+    let searchResult = result.slice(0,10);
+    showSearchResult(searchResult)
+}
+
+const showSearchResult = (searchResult) =>{
+    // console.log(searchResult)
+    let ulDom = document.querySelector("#search-result");
+    let liContent = "";
+    for(let i = 0; i < searchResult.length; i++){
+        // console.log(searchResult['SYMBOL'])
+        liContent += `<li>${searchResult[i]['SYMBOL']} ${searchResult[i]['NAME OF COMPANY']}</li>`;
+    }
+    ulDom.innerHTML = liContent;
 }

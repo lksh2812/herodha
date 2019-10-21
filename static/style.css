@@ -142,6 +142,7 @@ hr {
   padding-left: 0;
 }
 
+
 @media only screen and (max-width: 770px) {
   #buy-button, #add-to-cart {
     width: 100%;
