@@ -4,8 +4,21 @@
 <div class="row m-0 p-0">
 
     <div class="col-md-4 border-right m-0 p-0">
-        {% block left_content %}
-        {% endblock %}
+            <div class="row m-0 p-0">
+                    <div class="col-sm-12">
+                        <h3><u>Bookmarks</u></h3>
+                    </div>
+                </div>
+        {%for company in bookmarks %}
+        <div class="card w-10 bookmark">
+            <div class="card-header">
+                <a class="bookmark-symbol" href="/get_quote/{{company.company_code}}"
+                    style="text-decoration: none; color: rgb(13, 15, 15); font-size: 1.5rem;" class="card-title">{{company.company_code}}</a>
+                <span style="text-align: center;" class="ml-5">price</span>
+                <button class="btn btn-primary btn-sm remove-from-cart" style="float: right;">Remove</button>
+            </div>
+        </div>
+        {%endfor %}
     </div>
     <div class="col-md-8 m-0 p-0">
         {% block right_content %}

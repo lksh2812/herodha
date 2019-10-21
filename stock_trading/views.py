@@ -232,23 +232,26 @@ def dashboard(request):
 @login_required(login_url='/accounts/login')
 def current_holdings(request):
     current_user = request.user
+    bookmarks = Bookmark.objects.filter(user_id=current_user.id).values()
     obj = BuyTransaction.objects.filter(user_id=current_user.id)
     obj = list(obj)
-    return render(request, 'current_holdings.html', {'current_shares':obj})
+    return render(request, 'current_holdings.html', {'current_shares':obj, 'bookmarks': bookmarks})
 
 
 @login_required(login_url='/accounts/login')
 def past_holdings(request):
     current_user = request.user
-    print(current_user.id)
+    # print(current_user.id)
+    bookmarks = Bookmark.objects.filter(user_id=current_user.id).values()
     obj = list(SellTransaction.objects.filter(user_id=current_user.id))
     # obj = list(obj)
-    return render(request, 'past_holdings.html', {'past_shares':obj})
+    return render(request, 'past_holdings.html', {'past_shares':obj, 'bookmarks': bookmarks})
 
 @login_required(login_url='/accounts/login')
 def profile(request):
     current_user = request.user
-    return render(request, 'profile.html', {'user' : current_user})
+    bookmarks = Bookmark.objects.filter(user_id=current_user.id).values()
+    return render(request, 'profile.html', {'user' : current_user , 'bookmarks': bookmarks})
 
 @login_required(login_url='/accounts/login')
 def get_bookmarks(request):
