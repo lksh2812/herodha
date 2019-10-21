@@ -33,15 +33,80 @@
         <td id="profit">Profit</td>
         <td>{{share.date}}</td>
         <td>
-            <form action="/sell/{{share.company_code}}/" method="POST">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Sell</button>
+        
+                <!-- Button trigger modal -->
+            <button id="sell-button" class="btn btn-block btn-primary btn-danger" type="button" data-toggle="modal" data-target="#exampleModalCenter-{{share.id}}">
+                Sell
+            </button>
+          
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter-{{share.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Sell Shares</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form class="form m-1" action="/sell/{{share.company_code}}/" method="POST">
+                    {% csrf_token %}
+                <div class="modal-body">
+                        <div class="form-group">
+                                <label for="companyName">Company</label>
+                                <input class="form-control disabled" type="text" name="name" value="{{share.company_name}}" readonly>
+                            </div>
+                    <div class="form-group">
+                        <label for="companyName">Symbol</label>
+                        <input class="form-control disabled" type="text" name="symbol" value="{{share.company_code}}" readonly>
+                    </div>
+<!--           
+                    <div class="form-group">
+                      <label for="companyName">Current price</label>
+                      <input id="last-price-form" class="form-control disabled" type="text" name="lastPrice" value="">
+                    </div> -->
+          
+                    <div class="form-group">
+                      <label for="qty">Quantity</label>
+                      <input class="form-control" type="number" name="qty" min="1" required>
+                    </div>
+          
+                    <div class="form-group">
+                        <label for="total">Total</label>
+                        <input class="form-control disabled" type="text" name="total" readonly>
+                    </div>
+          
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <!-- <a href="{% url 'buy' }" class="btn btn-success shining">Confirm</a> -->
+                  <!-- {% if form.field.value.total > 100 %} -->
+                  <!-- <button type="submit" class="btn btn-primary" disabled>Confirm</button> -->
+                  <!-- {% else %} -->
+                  <button type="submit" class="btn btn-primary btn-danger">Confirm</button>
+                  <!-- {% endif %} -->
+        
+                </div>
             </form>
+              </div>
+            </div>
+            </div>
         </td>
     </tr>
     {% endif %}
     {% endfor %}    
 </table>
+<script>
+        $('input[name="qty"]').change(()=>{
+          let currentPrice = document.querySelector('#current-price').innerText;
+          let qtyInput = $('input[name="qty"]').val()
+        //   let lastPriceInput = $('input[name="lastPrice"').val()
+          let qty = Number(qtyInput)
+          let lastPrice = Number(currentPrice)
+          let total = qty * lastPrice
+          $('input[name="total"]').val(total)
+        })
+      </script>
 {% load static %}
 <script src="{% static 'current_holdings.js' %}"></script>
 {% endblock %}

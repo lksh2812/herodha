@@ -1,15 +1,10 @@
 window.onload = () => {
     let companyCode = document.querySelector('#company-code').innerText
-    // let bookmarkCode = document.querySelector('#bookmark-symbol').innerText
     let currentTime = new Date(),
-        currentTimeDom = document.querySelector("#current-time"),
-        addToCartDom = document.querySelector("#add-to-cart");
-        removeFromCartDom = document.querySelector('#remove-from-cart');
-    if (removeFromCartDom){
-            removeFromCartDom.addEventListener('click', removeFromCart(companyCode));
-
-    }
-
+        currentTimeDom = document.querySelector("#current-time");
+    let addToCartDom = document.querySelector('#add-to-cart');
+    addToCartDom.addEventListener('click', addToCart(companyCode));
+    
     if (currentTimeDom) {
         let month = new Array();
         month[0] = "Jan";
@@ -28,7 +23,6 @@ window.onload = () => {
     } else {
         console.log("Cannot find it")
     }
-    addToCartDom.addEventListener('click', addToCart(companyCode));
 
 
     getChart(companyCode);
@@ -42,6 +36,7 @@ const getChart = (companyCode) => {
             let xChartLabel = document.querySelector('.highcharts-xaxis-labels');
             xChartLabel.style.display = "none"
         })
+        .catch(err=>console.log(err, "chart nahi hai iska bhai"))
 }
 
 const drawChart = (chartData, companyCode) => {
@@ -110,25 +105,11 @@ const get_current_price = (companyCode) => {
 
 const addToCart = (companyCode) =>{
     return ()=>{
-        let host = window.location.hostname
-        console.log(host)
-        fetch(`http://127.0.0.1:8000/add_to_cart/`,{
+        let host = window.location.host;
+        fetch(`http://${host}/add_to_cart/`,{
             method : 'POST',
             body : JSON.stringify(companyCode)
         })
         .then(res=>res.status)
     }
 }
-
-const removeFromCart = (companyCode) =>{
-    return ()=>{
-        let host = window.location.hostname
-        console.log(host)
-        fetch(`http://127.0.0.1:8000/remove_from_cart/`,{
-            method : 'POST',
-            body : JSON.stringify(companyCode)
-        })
-        .then(res=>res.status)
-    }
-}
-

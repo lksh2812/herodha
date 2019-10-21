@@ -171,15 +171,15 @@ def sell(request, company_code):
 
     company_name = request.POST.get("name")
     company_code = request.POST.get('symbol')
-    last_price = float(request.POST.get('lastPrice'))
+    sell_value = float(request.POST.get('total'))
     quantity = int(request.POST.get('qty'))
+    last_price = sell_value/quantity
 
     old_quantity = bt.qty
     if quantity > old_quantity:
         messages.error(request, "Not enough stock quantity to sell.")
         return redirect('/get_quote/{}'.format(company_code))
     new_quantity = old_quantity - quantity
-    sell_value = float(request.POST.get('total'))
     old_total = bt.Total
     new_total = old_total - sell_value
     avg_price = bt.avg_price
@@ -194,7 +194,7 @@ def sell(request, company_code):
     messages.info(request, 'Your transaction was successful.')
     current_user.funds += sell_value
 
-    return redirect('/get_quote/{}'.format(company_code))
+    return redirect('/current_holdings'.format(company_code))
 
 
 def get_current_price(request, company_code):
@@ -231,7 +231,6 @@ def dashboard(request):
 @login_required(login_url='/accounts/login')
 def current_holdings(request):
     current_user = request.user
-    print(current_user.id)
     obj = BuyTransaction.objects.filter(user_id=current_user.id)
     obj = list(obj)
     return render(request, 'current_holdings.html', {'current_shares':obj})
