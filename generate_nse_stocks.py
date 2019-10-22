@@ -3,7 +3,7 @@ nse = Nse()
 import os
 import csv
 
-# update elasticsearch database with all currently present stocks in NSE
+# create csv file for all nse stocks
 def update_stocks():
     file = os.getcwd()
     all_stock_codes = nse.get_stock_codes()
