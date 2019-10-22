@@ -294,8 +294,9 @@ def addfunds(request):
                     'INDUSTRY_TYPE_ID': 'Retail',
                     'WEBSITE': 'WEBSTAGING',
                     'CHANNEL_ID': 'WEB',
-                    'CALLBACK_URL':'http://127.0.0.1:8000/payments/',
+                    'CALLBACK_URL':'http://'+request.get_host()+'/payments/',
                 }
+        print('http://'+request.get_host()+'/payments/')
         checksum = generate_checksum(paytmParams, MERCHANT_KEY)
         return render(request, 'paytm.html', {'paytmParams':paytmParams, \
             'checksum':checksum})
