@@ -31,8 +31,8 @@ async function getCurrentPriceAndProfit (companyCode, currentPriceDom, profitDom
     currentPriceDom.innerText = price
     qty = Number(qtyDom.innerText)
     currentPrice = Number(currentPriceDom.innerText)
-    sellingPrice = Number(totalDom.innerText)
-    buyingPrice = qty * currentPrice
+    buyingPrice = Number(totalDom.innerText)
+    sellingPrice = qty * currentPrice
     profit = sellingPrice - buyingPrice
     let color = "#00BB6E";
     if(profit < 0){

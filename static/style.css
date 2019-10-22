@@ -156,6 +156,13 @@ hr {
   }
 }
 
+#user-funds{
+  position: fixed;
+  z-index: 1;
+  bottom: 1rem;
+  left: 1rem;
+}
+
 @media only screen and (max-width: 770px) {
   #buy-button, #add-to-cart {
     width: 100%;

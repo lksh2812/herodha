@@ -6586,10 +6586,9 @@ let options = {
     ]
   };
 
-console.log("Search js")
 
 let fuse = new Fuse(allStocks, options)
-let result = fuse.search('reliance');
+// let result = fuse.search('reliance');
 
 let searchBoxDom = document.querySelector("input[name='stock']")
 const search = () =>{
@@ -6600,7 +6599,6 @@ const search = () =>{
 }
 
 const showSearchResult = (searchResult) =>{
-    // console.log(searchResult)
     let ulDom = document.querySelector("#search-result");
     let liContent = "";
     for(let i = 0; i < searchResult.length; i++){
