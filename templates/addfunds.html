@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{user.funds}}
 <form class="form-control text-center bg-light mb-6" action="{% url 'addfunds' %}" method="POST">
     {% csrf_token %}
     <div class="row">
-            <div class="col-sm-12">
+        <div class="col-sm-12">
                 <label class="form-group" for="amount" style="font-size: 2.5rem;">Enter amount to add to your account<label>
         </div>
             <div class="col-sm-4 m-auto">
