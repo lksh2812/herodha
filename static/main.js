@@ -86,7 +86,7 @@ const get_current_price = (companyCode) => {
                 let stockDataChangeValue = Number(stockDataChange.innerText)
                 let color = "#000";
                 let icon = ""
-                if (stockDataChangeValue > 0) {
+                if (stockDataChangeValue >= 0) {
                     color = "#00BB6E"
                     icon = "<i class='fas fa-sort-up'></i>"
                 }else{
