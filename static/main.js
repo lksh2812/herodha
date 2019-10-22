@@ -1,9 +1,17 @@
 window.onload = () => {
+    console.log("main.js")
     let companyCode = document.querySelector('#company-code').innerText
     let currentTime = new Date(),
         currentTimeDom = document.querySelector("#current-time");
     let addToCartDom = document.querySelector('#add-to-cart');
-    addToCartDom.addEventListener('click', addToCart(companyCode));
+
+    if(addToCartDom.innerText == 'Add'){
+        addToCartDom.addEventListener('click', addToCart(companyCode));
+    }
+    else if(addToCartDom.innerText == 'Remove'){
+        addToCartDom.addEventListener('click', removeFromCart(companyCode));
+    }
+   
     
     if (currentTimeDom) {
         let month = new Array();
@@ -36,7 +44,7 @@ const getChart = (companyCode) => {
             let xChartLabel = document.querySelector('.highcharts-xaxis-labels');
             xChartLabel.style.display = "none"
         })
-        .catch(err=>console.log(err, "chart nahi hai iska bhai"))
+        .catch(()=>console.log("chart nahi hai iska bhai"))
 }
 
 const drawChart = (chartData, companyCode) => {
@@ -80,11 +88,15 @@ const get_current_price = (companyCode) => {
                 let offerPrice = document.querySelector("#offer-price");
                 let pastCurrentPrice = Number(currentPrice.innerText)
                 let nowCurrentPrice = Number(stockData['lastPrice'])
-                let color = "#00BB6E";
+                let color = "#f8f8f8";
                 let icon = "<i class='fas fa-sort-up'></i>"
                 if (pastCurrentPrice > nowCurrentPrice) {
                     color = "#F34459";
                     icon = "<i class='fas fa-sort-down'></i>"
+                }else if(pastCurrentPrice === nowCurrentPrice){
+                    color = "#000000";
+                }else{
+                    color = "#00BB6E"
                 }
                 currentPrice.parentElement.style.background = color
                 currentPrice.innerText = stockData['lastPrice']
@@ -111,5 +123,17 @@ const addToCart = (companyCode) =>{
             body : JSON.stringify(companyCode)
         })
         .then(res=>res.status)
+    }
+}
+
+const removeFromCart = (companyCode) =>{
+    return ()=>{
+        let host = window.location.host
+        fetch(`http://${host}/remove_from_cart/`,{
+            method : 'POST',
+            body : JSON.stringify(companyCode)
+        })
+        .then(res=>res.status)
+        .catch(err => console.log("Abey err dekh " + err))
     }
 }

@@ -10,7 +10,7 @@
                     </div>
                 </div>
         {%for company in bookmarks %}
-        <div class="card w-10 bookmark">
+        <div id="company-{{company.company_code}}" class="card w-10 bookmark">
             <div class="card-header">
                 <a class="bookmark-symbol" href="/get_quote/{{company.company_code}}"
                     style="text-decoration: none; color: rgb(13, 15, 15); font-size: 1.5rem;" class="card-title">{{company.company_code}}</a>
@@ -21,4 +21,6 @@
         {%endfor %}
     </div>
 </div>
+{% load static %}
+<script src="{% static 'bookmarks.js' %}"></script>
     {% endblock %}

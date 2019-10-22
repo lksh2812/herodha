@@ -1,4 +1,12 @@
 window.onload = () =>{
+    console.log("current_holdings.js")
+    let removeFromCartDom = document.querySelectorAll('.remove-from-cart');
+    let bookmarkCodeDom = document.querySelectorAll('.bookmark-symbol');
+    
+    for(let i = 0 ; i < removeFromCartDom.length; i++){
+        let bookmarkCode = bookmarkCodeDom[i].innerText;
+        removeFromCartDom[i].addEventListener('click', removeFromCart(bookmarkCode))
+    }
     setInterval(getAllCurrentPriceOnPage, 3000)
 }
 
@@ -33,5 +41,21 @@ async function getCurrentPriceAndProfit (companyCode, currentPriceDom, profitDom
     profitDom.innerText = Math.round(profit * 100) / 100;
     profitDom.style.color = "white";
     profitDom.style.background = color;
+}
+
+const removeFromCart = (companyCode) =>{
+    return ()=>{
+        let host = window.location.host
+        fetch(`http://${host}/remove_from_cart/`,{
+            method : 'POST',
+            body : JSON.stringify(companyCode)
+        })
+        .then(res=>res.status)
+        .then(() =>{
+            element = document.querySelector('.bookmark');
+            element.parentNode.removeChild(element);
+        })
+        .catch(err => console.log("Abey err dekh " + err))
+    }
 }
 
