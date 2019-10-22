@@ -3,17 +3,13 @@ from django.db import models
 from datetime import datetime
 
 class User(AbstractUser):
-    
     # add additional fields in here
     funds = models.FloatField(default=100000.00)
-
-
     def __str__(self):
         return self.email
 
 
 class BuyTransaction(models.Model):
-    
     company_name = models.CharField(max_length=100)
     company_code = models.CharField(max_length=50)
     qty = models.IntegerField()
@@ -26,8 +22,7 @@ class BuyTransaction(models.Model):
     # def __str__(self):
     #     return '<User:{} Transactions {}>'.format(self.user_id__username, self.company_name)
 
-class SellTransaction(models.Model):
-    
+class SellTransaction(models.Model): 
     company_name = models.CharField(max_length=100)
     company_code = models.CharField(max_length=50)
     qty = models.IntegerField()
@@ -38,15 +33,20 @@ class SellTransaction(models.Model):
     date = models.DateTimeField(default=datetime.now, blank=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     
-
     # def __str__(self):
     #     return '<User:{} Transactions {}>'.format(self.user_id__username, self.company_name)
 
 class Bookmark(models.Model):
-    
     company_code = models.CharField(max_length=50)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    
 
     # def __str__(self):
     #     return '<User:{} Transactions {}>'.format(self.user_id__username, self.company_code)
+
+
+class Transaction(models.Model):
+    order_id = models.CharField(max_length=50)
+    amount = models.FloatField()
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now=True)
+    status = models.BooleanField()

@@ -2,9 +2,10 @@
 
 {% block content %}
     
-    <h1>Please do not refresh this page...</h1>
+    <h2>Please do not refresh this page...</h2>
+    <h2>Redirecting you to payment gateway</h2>
 
-    <form method="post" action="https://securegw-stage.paytm.in/order/process" name="paytm_form">>
+    <form method="post" action="https://securegw-stage.paytm.in/order/process" name="paytm_form">
         {% for name, value in paytmParams.items %}
             <input type="hidden" name="{{name}}" value="{{value}}">
         {% endfor %}
