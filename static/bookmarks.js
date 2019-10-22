@@ -5,6 +5,7 @@ window.onload = () =>{
 
     for(let i = 0 ; i < removeFromCartDom.length; i++){
         let bookmarkCode = bookmarkCodeDom[i].innerText;
+        console.log(bookmarkCode)
         removeFromCartDom[i].addEventListener('click', removeFromCart(bookmarkCode))
     }
 }
@@ -18,7 +19,7 @@ const removeFromCart = (companyCode) =>{
         })
         .then(res=>res.status)
         .then(() =>{
-            element = document.querySelector('.bookmark');
+            element = document.querySelector('#company-'+companyCode);
             element.parentNode.removeChild(element);
         })
         .catch(err => console.log("Abey err dekh " + err))

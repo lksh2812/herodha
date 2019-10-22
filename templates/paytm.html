@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <h2>Please do not refresh this page...</h2>
+    <h2>Redirecting you to payment gateway</h2>
+
+    <form method="post" action="https://securegw-stage.paytm.in/order/process" name="paytm_form">
+        {% for name, value in paytmParams.items %}
+            <input type="hidden" name="{{name}}" value="{{value}}">
+        {% endfor %}
+        <input type="hidden" name="CHECKSUMHASH" value="{{checksum}}">
+    
+    <script type="text/javascript">
+        document.paytm_form.submit();
+    </script>
+    </form>
+    
+{% endblock %}

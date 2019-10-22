@@ -31,7 +31,11 @@
     <button id="buy-button" class="btn-block" type="button" data-toggle="modal" data-target="#exampleModalCenter">
         Buy
     </button>
+    {% if bookmark_status %}
+    <button id="add-to-cart" class="btn-block">Remove</button>
+    {% else %}
     <button id="add-to-cart" class="btn-block">Add</button>
+    {%endif %}
     {% endif %}
   
   <!-- Modal -->
@@ -162,6 +166,13 @@
           let lastPrice = Number(lastPriceInput)
           let total = qty * lastPrice
           $('input[name="total"]').val(total)
+        })
+        let button = document.getElementById("add-to-cart");
+        button.addEventListener('click', ()=>{
+            if(button.innerText == 'Add')
+                button.innerText = 'Remove'
+            else
+                button.innerText = 'Add'
         })
       </script>
       {% load static %}
