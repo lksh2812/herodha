@@ -81,17 +81,18 @@ const get_current_price = (companyCode) => {
                 let volume = document.querySelector("#volume");
                 let bidPrice = document.querySelector("#bid-price");
                 let offerPrice = document.querySelector("#offer-price");
-                let pastCurrentPrice = Number(currentPrice.innerText)
-                let nowCurrentPrice = Number(stockData['lastPrice'])
-                let color = "#f8f8f8";
-                let icon = "<i class='fas fa-sort-up'></i>"
-                if (pastCurrentPrice > nowCurrentPrice) {
+                // let pastCurrentPrice = Number(currentPrice.innerText)
+                // let nowCurrentPrice = Number(stockData['lastPrice'])
+                let stockDataChangeValue = Number(stockDataChange.innerText)
+                let color = "#000";
+                let icon = ""
+                if (stockDataChangeValue > 0) {
+                    color = "#00BB6E"
+                    icon = "<i class='fas fa-sort-up'></i>"
+                }else{
                     color = "#F34459";
                     icon = "<i class='fas fa-sort-down'></i>"
-                }else if(pastCurrentPrice === nowCurrentPrice){
-                    color = "#000000";
-                }else{
-                    color = "#00BB6E"
+
                 }
                 currentPrice.parentElement.style.background = color
                 currentPrice.innerText = stockData['lastPrice']
