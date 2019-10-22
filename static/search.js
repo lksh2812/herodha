@@ -6588,7 +6588,7 @@ let options = {
 
 
 let fuse = new Fuse(allStocks, options)
-let result = fuse.search('reliance');
+// let result = fuse.search('reliance');
 
 let searchBoxDom = document.querySelector("input[name='stock']")
 const search = () =>{

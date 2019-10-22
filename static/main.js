@@ -1,5 +1,4 @@
 window.onload = () => {
-    console.log("main.js")
     let companyCode = document.querySelector('#company-code').innerText
     let currentTime = new Date(),
         currentTimeDom = document.querySelector("#current-time");

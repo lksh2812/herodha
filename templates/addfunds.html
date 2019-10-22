@@ -1,11 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action="{% url 'addfunds' %}" method="POST">
-        {% csrf_token %}
-        <label for="amount">Add money to your funds</label>
-        <input type="text" name="amount" id="amount">
-        <input type="submit" value="ADD FUNDS">
+{{user.funds}}
+<form class="form-control text-center bg-light mb-6" action="{% url 'addfunds' %}" method="POST">
+    {% csrf_token %}
+    <div class="row">
+            <div class="col-sm-12">
+                <label class="form-group" for="amount" style="font-size: 2.5rem;">Enter amount to add to your account<label>
+        </div>
+            <div class="col-sm-4 m-auto">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">        
+                            <i class="fa fa-rupee"></i>
+                        </div>
+                      </div>
+                      <input type="text" class="form-control form-control-lg" placeholder="Enter amount" name="amount">
+                    </div>
+                  </div>
+        </div>
+        <button class="btn btn-outline-primary display-4 mb-6" type="submit">Add Funds</button>
     </form>
+
 
 {% endblock %}
