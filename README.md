@@ -34,5 +34,24 @@
 * Create a virtual environment for installing all the dependencies.
 * The list of required dependecies are stored in ***requirements.txt***.
 * The dependencies can be installed by using a simple command in the virtual environment, `pip -r install requirements.txt`.
+* Evironment variables that are included in the .env file are as follows:
+    * SECRET_KEY
+    * DB_ENGINE
+    * DB_USER
+    * DB_NAME
+    * DB_PASSWORD
+    * DB_HOST
+    * DB_PORT
+    * ELASTICSEARCH_URL
+    * DJANGO_SETTINGS_MODULE
+    * EMAIL_HOST
+    * EMAIL_PORT
+    * EMAIL_USE_TLS
+    * EMAIL_HOST_USER
+    * EMAIL_HOST_PASSWORD
+    * MERCHANT_KEY
+    * MID
+    
+    ```Give the values to these variables accordingly.```
 
 
